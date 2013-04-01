@@ -12,21 +12,21 @@
             <p class="text-center lead" style="margin: 0px;">{{title}}</p>
         </div>
     </div>
-    <div class="row-fluid" style="height: 80%; overflow-x: hidden; overflow-y: auto; padding-left: 5px; padding-right: 5px;">
-        {{#each articles}}
+    <div class="row-fluid" style="height: 80%; overflow-x: hidden; overflow-y: auto; padding-right: 5px;">
+        {{#each articles}}{{/each}} 
         <div class="span12 thumbnail" style="height: 125px; margin: 0px;">
             <div class="span4">
-                <img src="{{this.img}}" alt="ALT NAME"/>
+                <a href="{{this.link}}"><img src="{{this.img}}http://placehold.it/320x200" alt="ALT NAME"/></a>
             </div>
             <div class="caption span6">
                 <p >{{this.resume}}</p>
             </div>
             <div class="span2" style="height: 100%; position: relative;">
-                <a href="{{this.link}}" class="btn btn-block btn-primary" type="button" style="position: absolute; top: 50%; margin-top: -15px; height: 30px;"> OK </a>
+                <p class="text-center" style="position: absolute; top: 50%; margin-top: -15px; height: 30px; width: 100%;"> 10/20 </a>
             </div>
         </div>
         <div class="span12" ></div>
-        {{/each}}        
+               
     </div>
     <div class="row-fluid">
         <div class="span12">
