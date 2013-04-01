@@ -10,10 +10,10 @@ KICKSTARTUTT est un projet ayant pour but de mettre à disposition des étudiant
 KICKSTARTUTT use the [Brunch](http://brunch.io) 'skeleton' [Brunch of Champions](https://github.com/simple10/brunch-of-champions), based on [Chaplin](https://github.com/chaplinjs/chaplin) and [Bootstrap](http://twitter.github.com/bootstrap) frameworks.
 
 ## Requires
-*[Node.js](http://nodejs.org) 1.0+.
-*[Brunch](http://brunch.io) 1.4+
-*[Brunch of Champions](https://github.com/simple10/brunch-of-champions)
-*[CouchDB](http://couchdb.apache.org) (not required now)
+- [Node.js](http://nodejs.org) 1.0+.
+- [Brunch](http://brunch.io) 1.4+
+- [Brunch of Champions](https://github.com/simple10/brunch-of-champions)
+- [CouchDB](http://couchdb.apache.org) (not required now)
 
 ## Getting started
 
