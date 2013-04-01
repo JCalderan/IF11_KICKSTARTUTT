@@ -1,13 +1,13 @@
 IF11_KICKSTARTUTT
 =================
 
-Dépot du projet KickstartUtt, réalisé dans le cadre de l'UV 'EDI et Commerce électronique' à l'Université Technologique de Troyes.
+KICKSTARTUTT project's repository, carried out under the UV 'EDI et Commerce électronique' (EDI and e-business), at the University of Technology of Troyes (UTT).
 
 # KICKSTARTUTT
 (English translation coming soon)
 KICKSTARTUTT est un projet ayant pour but de mettre à disposition des étudiants de l'Université de Technologie de Troyes un espace sur le web où exposer leurs projets et leur permettant de capitaliser leurs compétences.
 
-KICKSTARTUTT utilise le 'skeleton' [Brunch of Champions](https://github.com/simple10/brunch-of-champions) pour [Brunch](http://brunch.io) basé sur les frameworks [Chaplin](https://github.com/chaplinjs/chaplin) et [Bootstrap](http://twitter.github.com/bootstrap).
+KICKSTARTUTT use the [Brunch](http://brunch.io) 'skeleton' [Brunch of Champions](https://github.com/simple10/brunch-of-champions), based on [Chaplin](https://github.com/chaplinjs/chaplin) and [Bootstrap](http://twitter.github.com/bootstrap) frameworks.
 
 ## Requires
 *[Node.js](http://nodejs.org) 1.0+.
@@ -17,7 +17,7 @@ KICKSTARTUTT utilise le 'skeleton' [Brunch of Champions](https://github.com/simp
 
 ## Getting started
 
-We may assume that you already have git, node.js, and brunch installed and set up on your computer.
+We assume that you already have git, node.js, and brunch installed and set up on your computer.
 ```bash
 cd ~/<myPath>
 git clone https://github.com/JCalderan/IF11_KICKSTARTUTT.git KICKSTARTUTT
