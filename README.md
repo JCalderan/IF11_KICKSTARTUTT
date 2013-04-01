@@ -24,6 +24,7 @@ git clone https://github.com/JCalderan/IF11_KICKSTARTUTT.git KICKSTARTUTT
 cd KICKSTARTUTT
 npm start
 brunch watch --server
+'''
 
 ## Features
 (Coming soon)
