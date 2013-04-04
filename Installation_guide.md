@@ -26,6 +26,11 @@ $ curl -L https://github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh 
 $ chsh -s /bin/zsh
 $ zsh
 ```
+Si votre bash n'est pas remplacer par zsh au démarage d'un terminal, ajouter la ligne suivante à votre fichier ~/.bashrc
+
+```text
+zsh
+```
 
 A partir d'ici on pourra editer le fichier ~/.zshrc, qui est charger à chaque demarage d'un terminal zsh.
 Ajouter cette ligne à la fin du fichier (ou modifiez la si elle existe dejà).
@@ -50,7 +55,7 @@ source /usr/local/lib/node_modules/npm/lib/utils/completion.sh
 . ~/.nvm/nvm.sh
 ```
 
-A present installez node.js via la commande suivante (notez que le numero )
+A present installez node.js via la commande suivante :
 
 ```bash
 $ nvm install 0.10
@@ -59,4 +64,29 @@ Enfin on rajoute une ligne au fichier ~/.bashrc ou ~/.zshrc afin de charger node
 
 ```text
 nvm use 0.10
+```
+
+## Installer le module Brunch
+
+Maintenant nous pouvons installer [Brunch](http://brunch.io/), qui va nous permettre de gérer la l'infrasctructure de notre application web, au niveau de son arborescence mais également en gérant l'emsemble des frameworks et librairies qu'elle utilise.
+
+```bash
+$ npm install -g brunch
+```
+
+## Installer Git
+
+Installons Git via :
+
+```bash
+$ sudo apt-get install git-core
+```
+### Optionel
+
+Afin de gérer plus facilement sont dépot git nous proposont d'utiliser la librairie python [Legit](http://www.git-legit.org/).
+
+```bash
+$ sudo apt-get install python-setuptools
+$ sudo easy_install pip
+$ sudo pip install --upgrade virtualenv
 ```
