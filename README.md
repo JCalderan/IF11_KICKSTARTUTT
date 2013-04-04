@@ -21,11 +21,11 @@ KICKSTARTUTT use the [Brunch](http://brunch.io) 'skeleton' [Brunch of Champions]
 
 We assume that you already have git, node.js, and brunch installed and set up on your computer.
 ```bash
-cd ~/<myPath>
-git clone https://github.com/JCalderan/IF11_KICKSTARTUTT.git KICKSTARTUTT
-cd KICKSTARTUTT
-npm start
-brunch watch --server
+$ cd ~/<myPath>
+$ git clone https://github.com/JCalderan/IF11_KICKSTARTUTT.git KICKSTARTUTT
+$ cd KICKSTARTUTT
+$ npm start
+$ brunch watch --server
 ```
 
 ## Features
