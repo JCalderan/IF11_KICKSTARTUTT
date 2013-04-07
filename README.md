@@ -26,17 +26,25 @@ KICKSTARTUTT use the [Brunch](http://brunch.io) 'skeleton' [Brunch of Champions]
 We assume that you already have git, node.js, brunch, couchdb, and couchapp installed and set up on your computer.
 
 ```bash
-$ cd ~/<myPath>
+$ cd whateverpath
 $ git clone https://github.com/JCalderan/IF11_KICKSTARTUTT.git <app_name>
-$ cd KICKSTARTUTT
+$ cd <app_name>
 $ brunch build --optimize
 $ couchapp init
-$ couchapp push . http://<user>:<passwd>@localhost:5984/kickstartutt
+$ couchapp push . http://<user>:<passwd>@localhost:5984/<db_name>
+```
+
+In your host configuration file (/etc/hosts on Unix systems), add (or edit if existing) a row :
+```text
+# <ip> <domain1>:<port> <domain2>:<port>
+# if editing the row starting with 127.0.0.1 DO NOT remove the localhost domain
+# just add the name of your domain at the end of the line
+127.0.0.1 localhost <domain> 
 ```
 
 In your couchdb configuration document (default localisation : http://localhost:5984/_utils/config.html) add a row :
 ```text
-vhosts: localhost:5984/kickstartutt = /kickstartutt/_design/<app_name>/_rewrite
+vhosts: <domain>:5984 = /<db_name>/_design/<app_name>/_rewrite
 ```
 
 ## Features
