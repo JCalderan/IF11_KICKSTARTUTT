@@ -29,6 +29,7 @@ We assume that you already have git, node.js, brunch, couchdb, and couchapp inst
 $ cd ~/<myPath>
 $ git clone https://github.com/JCalderan/IF11_KICKSTARTUTT.git <app_name>
 $ cd KICKSTARTUTT
+$ brunch build --optimize
 $ couchapp init
 $ couchapp push . http://<user>:<passwd>@localhost:5984/kickstartutt
 ```
