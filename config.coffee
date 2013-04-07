@@ -1,6 +1,9 @@
 exports.config =
   # See http://brunch.io/#documentation for documentation.
   # https://github.com/brunch/brunch/blob/master/src/helpers.coffee
+  
+  paths:
+    public: '_attachments'
 
   # install growlnotify on osx to see notifications in growl
   # http://growl.info/downloads

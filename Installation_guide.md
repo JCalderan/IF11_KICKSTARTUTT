@@ -84,9 +84,18 @@ $ sudo apt-get install git-core
 ### Optionel
 
 Afin de gérer plus facilement sont dépot git nous proposont d'utiliser la librairie python [Legit](http://www.git-legit.org/).
-
+Avant cela installons le package manager python [pip](https://pypi.python.org/pypi/pip), et les gestionnaires d'environnement virtuel python [virtualenv](https://pypi.python.org/pypi/virtualenv) et [virtualenvwrapper](http://virtualenvwrapper.readthedocs.org/en/latest/)
 ```bash
 $ sudo apt-get install python-setuptools
 $ sudo easy_install pip
-$ sudo pip install --upgrade virtualenv
+$ sudo pip install virtualenv
+$ sudo pip install virtualenvwrapper
+mkdir -p ~/.virtualenvs
+```
+
+Enfin ajoutez au fichier ~/.bashrc (ou ~/.zshrc) les lignes suivantes :
+
+```bash
+export WORKON_HOME=~/.virtualenvs
+source ~/.local/bin/virtualenvwrapper.sh
 ```
