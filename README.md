@@ -27,15 +27,15 @@ We assume that you already have git, node.js, brunch, couchdb, and couchapp inst
 
 ```bash
 $ cd ~/<myPath>
-$ git clone https://github.com/JCalderan/IF11_KICKSTARTUTT.git KICKSTARTUTT
+$ git clone https://github.com/JCalderan/IF11_KICKSTARTUTT.git <app_name>
 $ cd KICKSTARTUTT
 $ couchapp init
 $ couchapp push . http://<user>:<passwd>@localhost:5984/kickstartutt
 ```
 
-In your couchb configuration document (default localisation : http://localhost:5984/_utils/config.html) add a row :
+In your couchdb configuration document (default localisation : http://localhost:5984/_utils/config.html) add a row :
 ```text
-vhosts: localhost:5984/kickstartutt = /kickstartutt/_design/KICKSTARTUTT/_rewrite
+vhosts: localhost:5984/kickstartutt = /kickstartutt/_design/<app_name>/_rewrite
 ```
 
 ## Features
