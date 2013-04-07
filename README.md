@@ -12,20 +12,30 @@ KICKSTARTUUT is a project aimed at providing to the students of the Université 
 KICKSTARTUTT use the [Brunch](http://brunch.io) 'skeleton' [Brunch of Champions](https://github.com/simple10/brunch-of-champions), based on [Chaplin](https://github.com/chaplinjs/chaplin) and [Bootstrap](http://twitter.github.com/bootstrap) frameworks.
 
 ## Requires
-- [Node.js](http://nodejs.org) 1.0+.
+- [Node.js](http://nodejs.org) 1.0+
 - [Brunch](http://brunch.io) 1.4+
 - [Brunch of Champions](https://github.com/simple10/brunch-of-champions)
-- [CouchDB](http://couchdb.apache.org) (not required now)
+- [CouchDB](http://couchdb.apache.org)
+
+### Recommended 
+- [couchapp](https://github.com/couchapp/couchapp)
+- or any other tools that help you to create web application through Couchdb
 
 ## Getting started
 
-We assume that you already have git, node.js, and brunch installed and set up on your computer.
+We assume that you already have git, node.js, brunch, couchdb, and couchapp installed and set up on your computer.
+
 ```bash
 $ cd ~/<myPath>
 $ git clone https://github.com/JCalderan/IF11_KICKSTARTUTT.git KICKSTARTUTT
 $ cd KICKSTARTUTT
-$ npm start
-$ brunch watch --server
+$ couchapp init
+$ couchapp push . http://<user>:<passwd>@localhost:5984/kickstartutt
+```
+
+In your couchb configuration document (default localisation : http://localhost:5984/_utils/config.html) add a row :
+```text
+vhosts: localhost:5984/kickstartutt = /kickstartutt/_design/KICKSTARTUTT/_rewrite
 ```
 
 ## Features
