@@ -5,5 +5,6 @@ module.exports = class HomePageView extends View
   autoRender: yes
   className: 'row-fluid'
   container: null
+  inner_container: "#home_page_container"
   id: 'home_page'
   template: template
