@@ -1,6 +1,6 @@
 Chaplin = require 'chaplin'
-HeaderController = require 'controllers/header-controller'
-FooterController = require 'controllers/footer-controller'
+HeaderController = require 'controllers/header_controller'
+FooterController = require 'controllers/footer_controller'
 Layout = require 'views/layout'
 mediator = require 'mediator'
 routes = require 'routes'
@@ -15,7 +15,7 @@ module.exports = class Application extends Chaplin.Application
     super
 
     # Initialize core components.
-    @initDispatcher controllerSuffix: '-controller'
+    @initDispatcher controllerSuffix: '_controller'
     @initLayout()
     @initMediator()
     @initComposer()
