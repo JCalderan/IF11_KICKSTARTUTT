@@ -15,14 +15,9 @@ module.exports = class ProjectItemView extends View
     @listenTo @model, "change", @render
     console.log "nouvelle projectItemView"
   
-  render: ->
+  render: =>
     super
-    @setRaty()
-    
-  setRaty: ->
-    console.log JSON.stringify(@raty_img)
-    raty_el = $("#star_"+@.model.attributes._id)
-    console.log if raty_el then raty_el else "ratyel not found"
-    #raty_el.raty()
-    #raty_el.raty("set", @raty_img)
-    #raty_el.raty("score", if @.model.attributes.score then @.model.attributes.score else 0)
+    raty_el = $(@el).find(".star_rating")
+    raty_el.raty()
+    raty_el.raty("set", @raty_img)
+    raty_el.raty("score", if @model.attributes.note then @model.attributes.note else 0)
