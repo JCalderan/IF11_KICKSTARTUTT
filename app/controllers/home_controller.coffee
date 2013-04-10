@@ -8,6 +8,9 @@ ModInfoView = require 'views/modInfo_view'
 ProjectsCol = require 'models/projects_collection'
 ProjectsColView = require 'views/projectsCol_view'
 
+ProjectModel = require 'models/project_model'
+ProjectView = require 'views/project_view'
+
 module.exports = class HomeController extends Controller
 
   index: ->
@@ -30,10 +33,16 @@ module.exports = class HomeController extends Controller
     
   list_projects: (params)->
     @view = new SplitPageView(container: '#page_container')
-
     projects_collection = new ProjectsCol()
     projects_collection.url = "/collection/projects/"+(if params.filter then params.filter else "")
     projectsCol_view = new ProjectsColView(collection: projects_collection, container: "#splitPage_left")
-    
     projects_collection.fetch()
+    console.log projects_collection
+  
+  get_project: (params)->
+    console.log params
+    @view = new SplitPageView(container: '#page_container')
+    project_model = new ProjectModel(_id: if params.id then params.id else null)
+    project_view = new ProjectView(model: project_model, container: "#splitPage_left")
+    project_model.fetch()
     

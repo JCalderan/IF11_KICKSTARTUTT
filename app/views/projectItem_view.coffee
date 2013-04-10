@@ -13,7 +13,7 @@ module.exports = class ProjectItemView extends View
     brunch_img = "/brunch/images/"
     @raty_img = "starHalf": brunch_img+"star-half.png", "starOff": brunch_img+"star-off.png", "starOn": brunch_img+"star-on.png", "cancelOff": brunch_img+"cancel-off.png", "cancelOn": brunch_img+"cancel-on.png"
     @listenTo @model, "change", @render
-    console.log "nouvelle projectItemView"
+    #console.log "nouvelle projectItemView"
   
   render: =>
     super
