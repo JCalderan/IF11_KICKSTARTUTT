@@ -1,26 +1,25 @@
 <div class="projectItem_container span12">
     <div class="projectItem_header row-fluid">
         <div class="span12">
-            <h4><strong><a href="#">Titre du projet</a></strong></h4>
+            <h4><strong><a href="#" class="toResProject">{{nom_projet}}</a></strong></h4>
         </div>
     </div>
     <div class="projectItem_body row-fluid">
         <div class="span3">
-            <a href="/view/project/{{this._id}}" class="thumbnail"><img src="http://placehold.it/260x180" alt="ALT NAME"/></a>
+            <a href="#" class="toResProject" class="thumbnail"><img src="http://placehold.it/260x180" alt="ALT NAME"/></a>
         </div>
         <div class="span6">
             <p>
-                Le Lorem Ipsum est simplement du faux texte employé dans la composition et la mise en page avant impression. Le Lorem Ipsum est le faux texte standard de l'imprimerie depuis les années 1500, quand un peintre anonyme assembla ensemble des morceaux de texte pour réaliser un livre spécimen de polices de tex...
+                {{description_projet}}...
             </p>
-            <a href="#" >Read More</a>
+            <a href="#" class="toResProject">Read More</a>
         </div>
         <div class="span3">
             <p><i class="icon-tags"></i> Tags :</p>
             <p>
-                <a href="#"><span class="label label-info">Snipp</span></a> 
-                <a href="#"><span class="label label-info">Bootstrap</span></a> 
-                <a href="#"><span class="label label-info">UI</span></a> 
-                <a href="#"><span class="label label-info">growth</span></a>
+                {{#each topics}}
+                    <a href="#" class="toResTags" ><span class="label label-info">{{this}}</span></a> 
+                {{/each}}
             </p>
         </div>
     </div>
@@ -28,8 +27,14 @@
         <div class="span12">
             <p></p>
             <p>
-                <i class="icon-user"></i> by <a href="#">{{this.auteur}}</a> 
-                | <i class="icon-calendar"></i> date creation
+                <i class="icon-user"></i> by <a href="#">
+                    {{#each members}}
+                        {{#if this.fondateur}}
+                            {{this.fondateur.ref_utilisateur}}
+                        {{/if}}
+                    {{/each}}
+                </a> 
+                | <i class="icon-calendar"></i> {{date_creation}}
                 | <i class="icon-comment"></i> <a href="#">N Comments</a>
                 | <i class="icon-pencil"></i> <a href="#">N Contributeurs</a>
                 | <i class="icon-star"></i> Note :
