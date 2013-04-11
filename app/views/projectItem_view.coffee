@@ -31,5 +31,8 @@ module.exports = class ProjectItemView extends View
     $(@el).find(".toResProject").attr("href", "/view/project/"+@model.attributes._id)
     $(@el).find(".toResTags").each(
         ->
-            $(@).attr("href", "/view/projets_by_topic/"+$(@).text())
+            $(@).attr("href", "/col/projets_by_topic/"+$(@).text())
     )
+
+  setComments: =>
+    return true
