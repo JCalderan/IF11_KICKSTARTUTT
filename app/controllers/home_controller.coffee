@@ -37,10 +37,8 @@ module.exports = class HomeController extends Controller
     projects_collection.url = "/collection/"+(if params.collection then params.collection else "")+"/"+(if params.filter then params.filter else "")
     projectsCol_view = new ProjectsColView(collection: projects_collection, container: "#splitPage_left")
     projects_collection.fetch()
-    console.log projects_collection
   
   get_project: (params)->
-    console.log params
     @view = new SplitPageView(container: '#page_container')
     project_model = new ProjectModel(_id: if params.id then params.id else null)
     project_view = new ProjectView(model: project_model, container: "#splitPage_left")

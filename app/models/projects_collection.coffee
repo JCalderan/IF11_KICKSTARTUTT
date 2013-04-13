@@ -5,7 +5,8 @@ module.exports = class ProjectsCol extends Collection
   model: projectItemModel
   
   initialize: ->
-    super()
+    super
 
   parse: (data)->
     return if data.rows then data.rows else data
+

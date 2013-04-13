@@ -12,6 +12,15 @@
     "to":"index.html"
   },
   {
+    "from":"/col/*",
+    "to":"index.html"
+  },
+  {
+    "from": "/collection/:col_name",
+    "to": "_view/:col_name",
+    "method": "GET"
+  },
+  {
     "from": "/collection/:col_name/:key",
     "to": "_view/:col_name",
     "method": "GET",
@@ -20,11 +29,6 @@
         ":key"
       ]
     }
-  },
-  {
-    "from": "/collection/:col_name",
-    "to": "_view/:col_name",
-    "method": "GET"
   },
   {
     "from": "/collection/:col_name/:id",

@@ -6,4 +6,6 @@ module.exports = class Collection extends Chaplin.Collection
   # _(@prototype).extend Chaplin.SyncMachine
 
   # Use the project base model per default, not Chaplin.Model
-  model: Model
+  #model: Model
+  
+
