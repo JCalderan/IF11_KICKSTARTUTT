@@ -11,6 +11,8 @@ ProjectsColView = require 'views/projectsCol_view'
 ProjectModel = require 'models/project_model'
 ProjectView = require 'views/project_view'
 
+SignUpView = require 'views/signUp_view'
+
 module.exports = class HomeController extends Controller
 
   index: ->
@@ -44,3 +46,5 @@ module.exports = class HomeController extends Controller
     project_view = new ProjectView(model: project_model, container: "#splitPage_left")
     project_model.fetch()
     
+  signup: (params)->
+    @view = new SignUpView(container: '#page_container')

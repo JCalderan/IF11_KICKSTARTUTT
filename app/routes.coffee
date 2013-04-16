@@ -3,4 +3,4 @@ module.exports = (match) ->
   match 'col/:collection', 'home#list_projects'
   match 'col/:collection/:filter', 'home#list_projects'
   match 'view/project/:id', 'home#get_project'
-
+  match 'view/signup', 'home#signup'
