@@ -1,7 +1,7 @@
-template = require "views/templates/projectItem"
-View = require "views/base/view"
-CommentCol = require "models/comments_collection"
-CommentColView = require "views/commentsCol_view"
+template = require 'views/templates/projectItem'
+View = require 'views/base/view'
+simpleObjectCollection = require 'models/simpleObject_collection'
+CommentColView = require 'views/commentsCol_view'
 
 mediator = require "mediator"
 
@@ -22,8 +22,7 @@ module.exports = class ProjectItemView extends View
     #custom init
     brunch_img = "/brunch/images/"
     @raty_img = "starHalf": brunch_img+"star-half.png", "starOff": brunch_img+"star-off.png", "starOn": brunch_img+"star-on.png", "cancelOff": brunch_img+"cancel-off.png", "cancelOn": brunch_img+"cancel-on.png"
-    @commentCol = new CommentCol()
-    @commentCol.url = "/collection/comments/"+ @model.attributes._id+"?limit=3"
+    @commentCol = new simpleObjectCollection(couchView: "comments", couchKey: @model.attributes._id, couchQueryParams: {"limit":3})
     
     #event handler
     @listenTo @model, "change", @render

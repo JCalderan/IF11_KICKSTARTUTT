@@ -2,13 +2,14 @@ Controller = require 'controllers/base/controller'
 HomePageView = require 'views/homePage_view'
 SplitPageView = require 'views/splitPage_view'
 
+SimpleObjectModel = require 'models/simpleObject_model'
+SimpleObject_collection = require 'models/simpleObject_collection'
+
 ModInfoModel = require 'models/modInfo_model'
 ModInfoView = require 'views/modInfo_view'
 
-ProjectsCol = require 'models/projects_collection'
 ProjectsColView = require 'views/projectsCol_view'
 
-ProjectModel = require 'models/project_model'
 ProjectView = require 'views/project_view'
 
 SignUpView = require 'views/signUp_view'
@@ -35,14 +36,13 @@ module.exports = class HomeController extends Controller
     
   list_projects: (params)->
     @view = new SplitPageView(container: '#page_container')
-    projects_collection = new ProjectsCol()
-    projects_collection.url = "/collection/"+(if params.collection then params.collection else "")+"/"+(if params.filter then params.filter else "")
+    projects_collection = new SimpleObject_collection(couchView:(if params.collection then params.collection else ""), couchKey:(if params.filter then params.filter else ""))
     projectsCol_view = new ProjectsColView(collection: projects_collection, container: "#splitPage_left")
     projects_collection.fetch()
   
   get_project: (params)->
     @view = new SplitPageView(container: '#page_container')
-    project_model = new ProjectModel(_id: if params.id then params.id else null)
+    project_model = new SimpleObjectModel(_id: if params.id then params.id else null)
     project_view = new ProjectView(model: project_model, container: "#splitPage_left")
     project_model.fetch()
     
