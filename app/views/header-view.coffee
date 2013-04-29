@@ -31,3 +31,6 @@ module.exports = class HeaderView extends View
                 process(result)
             )
     )
+    $(@el).find("#formSearchProjects").submit((event)->
+        $(@).attr("action", "/col/projects/"+$(@).find("#inputSearchProjects").val())
+    )
