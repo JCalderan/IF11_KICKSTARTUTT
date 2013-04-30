@@ -48,3 +48,12 @@ module.exports = class HomeController extends Controller
     
   signup: (params)->
     @view = new SignUpView(container: '#page_container')
+    $('#signup').submit ->
+        myData =
+            a: $this.identiant.value   
+        alert(myData);
+        #$.couch.db("mydb").saveDoc({}, {
+        #    success:function(data) {
+        #        console.log(data);
+        #    }
+        #});

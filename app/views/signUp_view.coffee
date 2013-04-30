@@ -11,4 +11,4 @@ module.exports = class SignUpView extends View
   #initialize: ->
   #  super
   #  @listenTo @model, "change", @render
-  #  
+  #
