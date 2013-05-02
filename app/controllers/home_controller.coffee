@@ -22,16 +22,16 @@ module.exports = class HomeController extends Controller
     staredProjects_model = new ModInfoModel(title:"Hot Projects", theme_color: "#CC4400")
     staredProjects_view = new ModInfoView(model: staredProjects_model, container: @view.inner_container)
     
-    lastProjects_model = new ModInfoModel(title: "Last Projects", theme_color: "#CC4400")
-    lastProjects_view = new ModInfoView(model: lastProjects_model, container: @view.inner_container)
+    #lastProjects_model = new ModInfoModel(title: "Last Projects", theme_color: "#CC4400")
+    #lastProjects_view = new ModInfoView(model: lastProjects_model, container: @view.inner_container)
+    #
+    #skillAdd_model = new ModInfoModel(title: "Need Skills ?", theme_color: "#CC4400")
+    #skillAdd_view = new ModInfoView(model: skillAdd_model, container: @view.inner_container)
+    #
+    #projectIdeas_model = new ModInfoModel(title: "Ideas ???", theme_color: "#CC4400")
+    #projectIdeas_view = new ModInfoView(model: projectIdeas_model, container: @view.inner_container)
     
-    skillAdd_model = new ModInfoModel(title: "Need Skills ?", theme_color: "#CC4400")
-    skillAdd_view = new ModInfoView(model: skillAdd_model, container: @view.inner_container)
     
-    projectIdeas_model = new ModInfoModel(title: "Ideas ???", theme_color: "#CC4400")
-    projectIdeas_view = new ModInfoView(model: projectIdeas_model, container: @view.inner_container)
-    
-    $(".modInfo").css("margin-left":"0px", "margin-right":"10px", "margin-bottom": "10px")
     
     
   list_projects: (params)->

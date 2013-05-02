@@ -214,7 +214,7 @@ window.require.register("controllers/header_controller", function(exports, requi
   
 });
 window.require.register("controllers/home_controller", function(exports, require, module) {
-  var Controller, HomeController, HomePageView, ModInfoModel, ModInfoView, ProjectModel, ProjectView, ProjectsCol, ProjectsColView, SignUpView, SplitPageView, _ref,
+  var Controller, HomeController, HomePageView, ModInfoModel, ModInfoView, ProjectView, ProjectsColView, SignUpView, SimpleObjectModel, SimpleObject_collection, SplitPageView, _ref,
     __hasProp = {}.hasOwnProperty,
     __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
 
@@ -224,15 +224,15 @@ window.require.register("controllers/home_controller", function(exports, require
 
   SplitPageView = require('views/splitPage_view');
 
+  SimpleObjectModel = require('models/simpleObject_model');
+
+  SimpleObject_collection = require('models/simpleObject_collection');
+
   ModInfoModel = require('models/modInfo_model');
 
   ModInfoView = require('views/modInfo_view');
 
-  ProjectsCol = require('models/projects_collection');
-
   ProjectsColView = require('views/projectsCol_view');
-
-  ProjectModel = require('models/project_model');
 
   ProjectView = require('views/project_view');
 
@@ -247,7 +247,7 @@ window.require.register("controllers/home_controller", function(exports, require
     }
 
     HomeController.prototype.index = function() {
-      var lastProjects_model, lastProjects_view, projectIdeas_model, projectIdeas_view, skillAdd_model, skillAdd_view, staredProjects_model, staredProjects_view;
+      var staredProjects_model, staredProjects_view;
 
       this.view = new HomePageView({
         container: '#page_container'
@@ -256,38 +256,9 @@ window.require.register("controllers/home_controller", function(exports, require
         title: "Hot Projects",
         theme_color: "#CC4400"
       });
-      staredProjects_view = new ModInfoView({
+      return staredProjects_view = new ModInfoView({
         model: staredProjects_model,
         container: this.view.inner_container
-      });
-      lastProjects_model = new ModInfoModel({
-        title: "Last Projects",
-        theme_color: "#CC4400"
-      });
-      lastProjects_view = new ModInfoView({
-        model: lastProjects_model,
-        container: this.view.inner_container
-      });
-      skillAdd_model = new ModInfoModel({
-        title: "Need Skills ?",
-        theme_color: "#CC4400"
-      });
-      skillAdd_view = new ModInfoView({
-        model: skillAdd_model,
-        container: this.view.inner_container
-      });
-      projectIdeas_model = new ModInfoModel({
-        title: "Ideas ???",
-        theme_color: "#CC4400"
-      });
-      projectIdeas_view = new ModInfoView({
-        model: projectIdeas_model,
-        container: this.view.inner_container
-      });
-      return $(".modInfo").css({
-        "margin-left": "0px",
-        "margin-right": "10px",
-        "margin-bottom": "10px"
       });
     };
 
@@ -297,8 +268,10 @@ window.require.register("controllers/home_controller", function(exports, require
       this.view = new SplitPageView({
         container: '#page_container'
       });
-      projects_collection = new ProjectsCol();
-      projects_collection.url = "/collection/" + (params.collection ? params.collection : "") + "/" + (params.filter ? params.filter : "");
+      projects_collection = new SimpleObject_collection({
+        couchView: (params.collection ? params.collection : ""),
+        couchKey: (params.filter ? params.filter : "")
+      });
       projectsCol_view = new ProjectsColView({
         collection: projects_collection,
         container: "#splitPage_left"
@@ -312,7 +285,7 @@ window.require.register("controllers/home_controller", function(exports, require
       this.view = new SplitPageView({
         container: '#page_container'
       });
-      project_model = new ProjectModel({
+      project_model = new SimpleObjectModel({
         _id: params.id ? params.id : null
       });
       project_view = new ProjectView({
@@ -332,10 +305,7 @@ window.require.register("controllers/home_controller", function(exports, require
         myData = {
           a: $this.identiant.value
         };
-        alert(myData);
-        return $('#test').click(function() {
-          return alert("Handler for .click() called.");
-        });
+        return alert(myData);
       });
     };
 
@@ -460,80 +430,6 @@ window.require.register("models/base/model", function(exports, require, module) 
   })(Chaplin.Model);
   
 });
-window.require.register("models/comment_model", function(exports, require, module) {
-  var CommentModel, Model, mediator, _ref,
-    __hasProp = {}.hasOwnProperty,
-    __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
-
-  Model = require('models/base/model');
-
-  mediator = require('mediator');
-
-  module.exports = CommentModel = (function(_super) {
-    __extends(CommentModel, _super);
-
-    function CommentModel() {
-      _ref = CommentModel.__super__.constructor.apply(this, arguments);
-      return _ref;
-    }
-
-    CommentModel.prototype.idAttribute = "_id";
-
-    CommentModel.prototype.initialize = function() {
-      return CommentModel.__super__.initialize.apply(this, arguments);
-    };
-
-    CommentModel.prototype.parse = function(data) {
-      if (data.value) {
-        return data.value;
-      } else {
-        return data;
-      }
-    };
-
-    return CommentModel;
-
-  })(Model);
-  
-});
-window.require.register("models/comments_collection", function(exports, require, module) {
-  var Collection, CommentsCol, commentModel, mediator, _ref,
-    __hasProp = {}.hasOwnProperty,
-    __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
-
-  Collection = require('models/base/collection');
-
-  commentModel = require('models/comment_model');
-
-  mediator = require('mediator');
-
-  module.exports = CommentsCol = (function(_super) {
-    __extends(CommentsCol, _super);
-
-    function CommentsCol() {
-      _ref = CommentsCol.__super__.constructor.apply(this, arguments);
-      return _ref;
-    }
-
-    CommentsCol.prototype.model = commentModel;
-
-    CommentsCol.prototype.initialize = function() {
-      return CommentsCol.__super__.initialize.apply(this, arguments);
-    };
-
-    CommentsCol.prototype.parse = function(data) {
-      if (data.rows) {
-        return data.rows;
-      } else {
-        return data;
-      }
-    };
-
-    return CommentsCol;
-
-  })(Collection);
-  
-});
 window.require.register("models/modInfo_model", function(exports, require, module) {
   var ModInfoModel, Model, _ref,
     __hasProp = {}.hasOwnProperty,
@@ -564,86 +460,14 @@ window.require.register("models/modInfo_model", function(exports, require, modul
   })(Model);
   
 });
-window.require.register("models/projectItem_model", function(exports, require, module) {
-  var Model, ProjectItemModel, mediator, _ref,
-    __hasProp = {}.hasOwnProperty,
-    __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
-
-  Model = require('models/base/model');
-
-  mediator = require('mediator');
-
-  module.exports = ProjectItemModel = (function(_super) {
-    __extends(ProjectItemModel, _super);
-
-    function ProjectItemModel() {
-      _ref = ProjectItemModel.__super__.constructor.apply(this, arguments);
-      return _ref;
-    }
-
-    ProjectItemModel.prototype.idAttribute = "_id";
-
-    ProjectItemModel.prototype.initialize = function() {
-      return ProjectItemModel.__super__.initialize.apply(this, arguments);
-    };
-
-    ProjectItemModel.prototype.parse = function(data) {
-      if (data.value) {
-        return data.value;
-      } else {
-        return data;
-      }
-    };
-
-    return ProjectItemModel;
-
-  })(Model);
-  
-});
-window.require.register("models/project_model", function(exports, require, module) {
-  var Model, ProjectModel, _ref,
-    __hasProp = {}.hasOwnProperty,
-    __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
-
-  Model = require('models/base/model');
-
-  module.exports = ProjectModel = (function(_super) {
-    __extends(ProjectModel, _super);
-
-    function ProjectModel() {
-      _ref = ProjectModel.__super__.constructor.apply(this, arguments);
-      return _ref;
-    }
-
-    ProjectModel.prototype.urlRoot = "/model";
-
-    ProjectModel.prototype.idAttribute = "_id";
-
-    ProjectModel.prototype.initialize = function() {
-      return ProjectModel.__super__.initialize.apply(this, arguments);
-    };
-
-    ProjectModel.prototype.parse = function(data) {
-      if (data.rows) {
-        return data.rows;
-      } else {
-        return data;
-      }
-    };
-
-    return ProjectModel;
-
-  })(Model);
-  
-});
-window.require.register("models/projects_collection", function(exports, require, module) {
-  var Collection, ProjectsCol, projectItemModel, _ref,
+window.require.register("models/simpleObject_collection", function(exports, require, module) {
+  var Collection, ProjectsCol, simpleObjectmModel, _ref,
     __hasProp = {}.hasOwnProperty,
     __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
 
   Collection = require('models/base/collection');
 
-  projectItemModel = require('models/projectItem_model');
+  simpleObjectmModel = require('models/simpleObject_model');
 
   module.exports = ProjectsCol = (function(_super) {
     __extends(ProjectsCol, _super);
@@ -653,10 +477,33 @@ window.require.register("models/projects_collection", function(exports, require,
       return _ref;
     }
 
-    ProjectsCol.prototype.model = projectItemModel;
+    ProjectsCol.prototype.model = simpleObjectmModel;
 
-    ProjectsCol.prototype.initialize = function() {
-      return ProjectsCol.__super__.initialize.apply(this, arguments);
+    ProjectsCol.prototype.initialize = function(options) {
+      options ||  (options = {});
+      ProjectsCol.__super__.initialize.call(this, options);
+      if (options.couchView) {
+        return this.url = function() {
+          var paramKey, paramValue, tmp_url, url;
+
+          tmp_url = "/collection/" + options.couchView + "/" + (options.couchKey ? options.couchKey : "");
+          if (options.couchQueryParams) {
+            tmp_url += "?";
+            tmp_url += (function() {
+              var _ref1, _results;
+
+              _ref1 = options.couchQueryParams;
+              _results = [];
+              for (paramKey in _ref1) {
+                paramValue = _ref1[paramKey];
+                _results.push("" + paramKey + "=" + paramValue + "&");
+              }
+              return _results;
+            })();
+          }
+          return url = tmp_url;
+        };
+      }
     };
 
     ProjectsCol.prototype.parse = function(data) {
@@ -670,6 +517,119 @@ window.require.register("models/projects_collection", function(exports, require,
     return ProjectsCol;
 
   })(Collection);
+  
+});
+window.require.register("models/simpleObject_model", function(exports, require, module) {
+  var CommentModel, Model, mediator, __appDesignDoc, _ref,
+    __bind = function(fn, me){ return function(){ return fn.apply(me, arguments); }; },
+    __hasProp = {}.hasOwnProperty,
+    __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
+
+  Model = require('models/base/model');
+
+  mediator = require('mediator');
+
+  __appDesignDoc = "kickstartutt";
+
+  module.exports = CommentModel = (function(_super) {
+    __extends(CommentModel, _super);
+
+    function CommentModel() {
+      this.watch = __bind(this.watch, this);    _ref = CommentModel.__super__.constructor.apply(this, arguments);
+      return _ref;
+    }
+
+    CommentModel.prototype.idAttribute = "_id";
+
+    CommentModel.prototype.feed = null;
+
+    CommentModel.prototype.initialize = function(options) {
+      CommentModel.__super__.initialize.call(this, options);
+      this.url = function() {
+        return "/model/" + this.id;
+      };
+      return this.feed = {};
+    };
+
+    CommentModel.prototype.watch = function(options) {
+      var req,
+        _this = this;
+
+      options || (options = {});
+      if (options.filter && !this.feed.filter) {
+        if (typeof options.filter === "string") {
+          this.feed.filter = __appDesignDoc + "/" + options.filter;
+        } else {
+          this.feed.filter = options.filter;
+        }
+      }
+      if (!this.feed.since) {
+        if (options.since) {
+          if (options.since === "now") {
+            this.feed.since = 0;
+            this.feed.descending = true;
+            this.feed.limit = 1;
+          } else {
+            this.feed.since = options.since;
+          }
+        } else {
+          this.feed.since = 0;
+        }
+      }
+      if (options !== "stop") {
+        req = $.ajax({
+          url: "/model/_changes?id=" + this.id + "&feed=longpoll",
+          method: "GET",
+          contentType: "application/json; charset=utf-8",
+          data: this.feed,
+          dataType: "json"
+        });
+        req.done(function(dataChanges) {
+          console.log(dataChanges);
+          if (dataChanges.last_seq) {
+            _this.watch({
+              since: dataChanges.last_seq
+            });
+            return _this.fetch({
+              watchSince: dataChanges.last_seq
+            });
+          } else {
+            return console.log("error");
+          }
+        });
+        return req.fail(function(dataError) {
+          dataError = typeof dataError === "string" ? JSON.parse(dataError) : dataError;
+          if (dataError.last_seq) {
+            return _this.watch({
+              since: dataError.last_seq
+            });
+          }
+        });
+      }
+    };
+
+    CommentModel.prototype.fetch = function(options) {
+      options ||  (options = {});
+      CommentModel.__super__.fetch.call(this, options);
+      if (options.watchSince) {
+        console.log("watch since :" + options.watchSince);
+        return this.watch({
+          "since": options.watchSince
+        });
+      }
+    };
+
+    CommentModel.prototype.parse = function(data) {
+      if (data.value) {
+        return data.value;
+      } else {
+        return data;
+      }
+    };
+
+    return CommentModel;
+
+  })(Model);
   
 });
 window.require.register("routes", function(exports, require, module) {
@@ -908,6 +868,39 @@ window.require.register("views/header-view", function(exports, require, module) 
 
     HeaderView.prototype.template = template;
 
+    HeaderView.prototype.initialize = function() {
+      return HeaderView.__super__.initialize.apply(this, arguments);
+    };
+
+    HeaderView.prototype.render = function() {
+      HeaderView.__super__.render.apply(this, arguments);
+      console.log($(this.el).find(".typeahead"));
+      $(this.el).find(".typeahead").typeahead({
+        source: function(query, process) {
+          return $.ajax({
+            url: "/collection/projects?startkey=[" + JSON.stringify(query) + "]",
+            methode: "GET",
+            dataType: "json",
+            contentType: "application/json; charset=UTF-8",
+            beforeSend: function() {
+              return console.log(query);
+            }
+          }).done(function(data) {
+            var result;
+
+            result = [];
+            data.rows.forEach(function(row) {
+              return result.push(row.value.nom_projet);
+            });
+            return process(result);
+          });
+        }
+      });
+      return $(this.el).find("#formSearchProjects").submit(function(event) {
+        return $(this).attr("action", "/col/projects/" + $(this).find("#inputSearchProjects").val());
+      });
+    };
+
     return HeaderView;
 
   })(View);
@@ -969,6 +962,7 @@ window.require.register("views/layout", function(exports, require, module) {
 });
 window.require.register("views/modInfo_view", function(exports, require, module) {
   var ModInfoView, View, mediator, template, _ref,
+    __bind = function(fn, me){ return function(){ return fn.apply(me, arguments); }; },
     __hasProp = {}.hasOwnProperty,
     __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
 
@@ -982,13 +976,13 @@ window.require.register("views/modInfo_view", function(exports, require, module)
     __extends(ModInfoView, _super);
 
     function ModInfoView() {
-      _ref = ModInfoView.__super__.constructor.apply(this, arguments);
+      this.render = __bind(this.render, this);    _ref = ModInfoView.__super__.constructor.apply(this, arguments);
       return _ref;
     }
 
     ModInfoView.prototype.autoRender = true;
 
-    ModInfoView.prototype.className = 'span6 modInfo';
+    ModInfoView.prototype.className = 'modInfo';
 
     ModInfoView.prototype.container = null;
 
@@ -996,7 +990,39 @@ window.require.register("views/modInfo_view", function(exports, require, module)
 
     ModInfoView.prototype.initialize = function() {
       ModInfoView.__super__.initialize.apply(this, arguments);
-      return this.listenTo(this.model, "change", this.render);
+      this.listenTo(this.model, "change", this.render);
+      this.delegate("click", "[id^=carousel-selector-]", this.carouselSelector);
+      return this.delegate('slid', "#myCarousel", this.carouselUpdateText);
+    };
+
+    ModInfoView.prototype.render = function() {
+      ModInfoView.__super__.render.apply(this, arguments);
+      $(this.el).find("#myCarousel").carousel({
+        interval: 5000
+      });
+      return $(this.el).find("#carousel-text").html($(this.el).find("#slide-content-0").html());
+    };
+
+    ModInfoView.prototype.carouselSelector = function(event) {
+      var id, id_selector;
+
+      if (event) {
+        event.preventDefault();
+      }
+      id_selector = event.currentTarget.id;
+      id = id_selector.substr(id_selector.lastIndexOf("-") + 1);
+      id = parseInt(id);
+      return $("#myCarousel").carousel(id);
+    };
+
+    ModInfoView.prototype.carouselUpdateText = function(event) {
+      var id;
+
+      if (event) {
+        event.preventDefault();
+      }
+      id = $(this.el).find(".item.active").data("slide-number");
+      return $(this.el).find("#carousel-text").html($(this.el).find("#slide-content-" + id).html());
     };
 
     return ModInfoView;
@@ -1005,18 +1031,18 @@ window.require.register("views/modInfo_view", function(exports, require, module)
   
 });
 window.require.register("views/projectItem_view", function(exports, require, module) {
-  var CommentCol, CommentColView, ProjectItemView, View, mediator, template, _ref,
+  var CommentColView, ProjectItemView, View, mediator, simpleObjectCollection, template, _ref,
     __bind = function(fn, me){ return function(){ return fn.apply(me, arguments); }; },
     __hasProp = {}.hasOwnProperty,
     __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
 
-  template = require("views/templates/projectItem");
+  template = require('views/templates/projectItem');
 
-  View = require("views/base/view");
+  View = require('views/base/view');
 
-  CommentCol = require("models/comments_collection");
+  simpleObjectCollection = require('models/simpleObject_collection');
 
-  CommentColView = require("views/commentsCol_view");
+  CommentColView = require('views/commentsCol_view');
 
   mediator = require("mediator");
 
@@ -1057,8 +1083,13 @@ window.require.register("views/projectItem_view", function(exports, require, mod
         "cancelOff": brunch_img + "cancel-off.png",
         "cancelOn": brunch_img + "cancel-on.png"
       };
-      this.commentCol = new CommentCol();
-      this.commentCol.url = "/collection/comments/" + this.model.attributes._id + "?limit=3";
+      this.commentCol = new simpleObjectCollection({
+        couchView: "comments",
+        couchKey: this.model.attributes._id,
+        couchQueryParams: {
+          "limit": 3
+        }
+      });
       this.listenTo(this.model, "change", this.render);
       this.delegate("click", ".comments_number", this.initLoadComments);
       return this.delegate("click", ".hide_comments", this.hideComments);
@@ -1226,10 +1257,6 @@ window.require.register("views/signUp_view", function(exports, require, module) 
 
     SignUpView.prototype.template = template;
 
-    $('#test').click(function() {
-      return alert("Handler for .click() called.");
-    });
-
     return SignUpView;
 
   })(View);
@@ -1308,7 +1335,7 @@ window.require.register("views/templates/header", function(exports, require, mod
     
 
 
-    return "\n<div class=\"navbar-inner\">\n  <div class=\"container\">\n    <a class=\"brand\">KICKSTARTUTT</a>\n    <div class=\"nav-collapse\">\n      <ul class=\"nav\">\n        <li><a href=\"/\"><i class=\"icon-home icon-white\"></i> Home</a></li>\n        <li ><a href=\"/col/projects/top\"><i class=\"icon-star icon-white\"></i> Top Projects</a></li>\n        <li><a href=\"/col/projects\"><i class=\"icon-list icon-white\"></i> All Projects</a></li>\n        <li><a href=\"/view/projectLauncher\"><i class=\"icon-pencil icon-white\"></i> Launch your Project</a></li>\n      </ul>\n      <form class=\"navbar-form form-inline span2\">\n        <div class=\"input-append\" >\n          <input type=\"text\" style=\"height: 100%;\" class=\"span2\"/>\n          <div class=\"btn-group\" style=\"height: 100%;\">\n            <button tabindex=\"-1\" class=\"btn\">Search</button>\n            <button tabindex=\"-1\" data-toggle=\"dropdown\" class=\"btn dropdown-toggle\">\n              <span class=\"caret\"></span>\n            </button>\n            <ul class=\"dropdown-menu\">\n              <li><a href=\"#\">Action</a></li>\n              <li><a href=\"#\">Another action</a></li>\n              <li><a href=\"#\">Something else here</a></li>\n              <li class=\"divider\"></li>\n              <li><a href=\"#\">Separated link</a></li>\n            </ul>\n          </div>\n        </div>\n      </form>\n      <ul class=\"nav pull-right\">\n        <li class=\"dropdown\">\n          <a data-toggle=\"dropdown\" href=\"#\" class=\"dropdown-toggle\">Sign In <strong class=\"caret\"></strong></a>\n          <div class=\"dropdown-menu\"  style=\"padding: 15px; padding-bottom: 0px;\">\n           <form accept-charset=\"UTF-8\" action=\"login\" method=\"post\">\n              <input type=\"text\" name=\"username\" id=\"username\" placeholder=\"Username\" style=\"margin-bottom: 15px;\" />\n              <input type=\"password\" name=\"password\" id=\"password\" placeholder=\"Password\" style=\"margin-bottom: 15px;\" />\n              <input type=\"checkbox\" value=\"1\" id=\"remember-me\" name=\"remember-me\" style=\"float: left; margin-right: 10px;\" />\n              <label for=\"remember-me\" class=\"string optional\"> Remember me</label>\n              <input type=\"submit\" value=\"Sign In\" id=\"sign-in\" class=\"btn btn-primary btn-block\">\n              <label style=\"text-align:center;margin-top:5px\">or</label>\n              <a href=\"/view/signup\" id=\"sign-up\" class=\"btn btn-primary btn-block\">Sign Up</a>\n            </form>\n          </div>\n        </li>\n      </ul>\n    </div>\n  </div>\n</div>\n<div style=\"width: 100%; color: white;\">\n  <p class=\"text-center\" style=\"background-color: #0088CC; height: 30px; font-size: 1.2em; line-height: 1.7em;\" >Official UTT's projects showcase and launcher !</p>\n</div>\n";
+    return "\n<div class=\"navbar-inner\">\n  <div class=\"container\">\n    <a class=\"brand\" href=\"#\">KICKSTARTUTT</a>\n    <div class=\"nav-collapse\">\n      <ul class=\"nav\">\n        <li><a href=\"/\"><i class=\"icon-home icon-white\"></i> Home</a></li>\n        <li ><a href=\"/col/projects/top\"><i class=\"icon-star icon-white\"></i> Top Projects</a></li>\n        <li><a href=\"/col/projects\"><i class=\"icon-list icon-white\"></i> All Projects</a></li>\n        <li><a href=\"/view/projectLauncher\"><i class=\"icon-pencil icon-white\"></i> Launch your Project</a></li>\n      </ul>\n      <form class=\"navbar-form form-search span3\" id=\"formSearchProjects\">\n          <input id=\"inputSearchProjects\" type=\"text\" style=\"height: 100%; width: 100%;\" class=\"search-query typeahead\" placeholder=\"Search projects\" autocomplete=\"off\"/>\n          <input type=\"submit\" value=\"search\" style=\"display: none;\" />\n<!--        <div class=\"input-append search\" >\n          <input type=\"text\" style=\"height: 100%;\" class=\"span2 typeahead\"/>\n          <div class=\"btn-group\" style=\"height: 100%;\">\n            <button tabindex=\"-1\" class=\"btn\">Search</button>\n            <button tabindex=\"-1\" data-toggle=\"dropdown\" class=\"btn dropdown-toggle\">\n              <span class=\"caret\"></span>\n            </button>\n            <ul class=\"dropdown-menu\">\n              <li><a href=\"#\">Action</a></li>\n              <li><a href=\"#\">Another action</a></li>\n              <li><a href=\"#\">Something else here</a></li>\n              <li class=\"divider\"></li>\n              <li><a href=\"#\">Separated link</a></li>\n            </ul>\n          </div>\n        </div>-->\n      </form> \n      <ul class=\"nav pull-right\">\n        <li class=\"dropdown\">\n          <a data-toggle=\"dropdown\" href=\"#\" class=\"dropdown-toggle\">Sign In <strong class=\"caret\"></strong></a>\n          <div class=\"dropdown-menu\"  style=\"padding: 15px; padding-bottom: 0px;\">\n           <form accept-charset=\"UTF-8\" action=\"login\" method=\"post\">\n              <input type=\"text\" name=\"username\" id=\"username\" placeholder=\"Username\" style=\"margin-bottom: 15px;\" />\n              <input type=\"password\" name=\"password\" id=\"password\" placeholder=\"Password\" style=\"margin-bottom: 15px;\" />\n              <input type=\"checkbox\" value=\"1\" id=\"remember-me\" name=\"remember-me\" style=\"float: left; margin-right: 10px;\" />\n              <label for=\"remember-me\" class=\"string optional\"> Remember me</label>\n              <input type=\"submit\" value=\"Sign In\" id=\"sign-in\" class=\"btn btn-primary btn-block\">\n              <label style=\"text-align:center;margin-top:5px\">or</label>\n              <a href=\"/view/signup\" id=\"sign-up\" class=\"btn btn-primary btn-block\">Sign Up</a>\n            </form>\n          </div>\n        </li>\n      </ul>\n    </div>\n  </div>\n</div>\n<div style=\"width: 100%; color: white;\">\n  <p class=\"text-center\" style=\"background-color: #0088CC; height: 30px; font-size: 1.2em; line-height: 1.7em;\" >Official UTT's projects showcase and launcher !</p>\n</div>\n";
     });
 });
 window.require.register("views/templates/home", function(exports, require, module) {
@@ -1322,6 +1349,39 @@ window.require.register("views/templates/home", function(exports, require, modul
     });
 });
 window.require.register("views/templates/modInfo", function(exports, require, module) {
+  module.exports = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
+    this.compilerInfo = [2,'>= 1.0.0-rc.3'];
+  helpers = helpers || Handlebars.helpers; data = data || {};
+    var buffer = "", stack1, functionType="function", escapeExpression=this.escapeExpression, self=this;
+
+  function program1(depth0,data) {
+    
+    var buffer = "";
+    return buffer;
+    }
+
+    buffer += "<div class=\"tabbable tabs-left\">\n  <ul class=\"nav nav-tabs\">\n    <li class=\"active\"><a href=\"#tab1\" data-toggle=\"tab\">Notre sélection</a></li>\n    <li><a href=\"#tab2\" data-toggle=\"tab\">Financés</a></li>\n    <li><a href=\"#tab3\" data-toggle=\"tab\">Les plus populaires</a></li>\n    <li><a href=\"#tab4\" data-toggle=\"tab\">Juste commencés</a></li>\n    <li><a href=\"#tab5\" data-toggle=\"tab\">Bientôt terminés</a></li>\n  </ul>\n  <div class=\"tab-content\">\n    <div class=\"tab-pane active\" id=\"tab1\">\n      <!-- Main Area  Slider-->\n      <div id=\"main_area\">\n        <!-- Slider -->\n        <div class=\"span12\" id=\"slider\">\n          <!-- Top part of the slider -->\n          <div class=\"span8\" id=\"carousel-bounding-box\">\n            <div id=\"myCarousel\" class=\"carousel slide\">\n              <!-- Carousel items -->\n              <div class=\"carousel-inner\">\n                <div class=\"active item\" data-slide-number=\"0\"><img src=\"http://placehold.it/770x300&text=one\" /></div>\n                <div class=\"item\" data-slide-number=\"1\"><img src=\"http://placehold.it/770x300&text=two\" /></div>\n                <div class=\"item\" data-slide-number=\"2\"><img src=\"http://placehold.it/770x300&text=three\" /></div>\n                <div class=\"item\" data-slide-number=\"3\"><img src=\"http://placehold.it/770x300&text=four\" /></div>\n                <div class=\"item\" data-slide-number=\"4\"><img src=\"http://placehold.it/770x300&text=five\" /></div>\n                <div class=\"item\" data-slide-number=\"5\"><img src=\"http://placehold.it/770x300&text=six\" /></div>\n              </div>\n              <!-- Carousel nav -->\n              <a class=\"carousel-control left\" href=\"#myCarousel\" data-slide=\"prev\">‹</a>\n              <a class=\"carousel-control right\" href=\"#myCarousel\" data-slide=\"next\">›</a>\n            </div>\n          </div>\n          <div class=\"span4\" id=\"carousel-text\"></div> \n            <div style=\"display: none;\" id=\"slide-content\">\n              <div id=\"slide-content-0\">\n                <h2>Slider One</h2>\n                <p>Lorem ipsum dolor sit amet,   dolor in reprehenderit in voluptate velit esse cilludolor in tate velit esse cilludolor in reprehenderitehenderit in voluptate velit esse cilludolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum </p>\n                <p class=\"sub-text\">October 24 2012 - <a href=\"#\">Read more</a></p>\n              </div>\n              <div id=\"slide-content-1\">\n                <h2>Slider Two</h2>\n                <p>Lorem Ipsum Dolor</p>\n                <p class=\"sub-text\">October 24 2012 - <a href=\"#\">Read more</a></p>\n              </div>\n              <div id=\"slide-content-2\">\n                <h2>Slider Three</h2>\n                <p>Lorem Ipsum Dolor</p>\n                <p class=\"sub-text\">October 24 2012 - <a href=\"#\">Read more</a></p>\n              </div>\n              <div id=\"slide-content-3\">\n                <h2>Slider Four</h2>\n                <p>Lorem Ipsum Dolor</p>\n                <p class=\"sub-text\">October 24 2012 - <a href=\"#\">Read more</a></p>\n              </div>\n              <div id=\"slide-content-4\">\n                <h2>Slider Five</h2>\n                <p>Lorem Ipsum Dolor</p>\n                <p class=\"sub-text\">October 24 2012 - <a href=\"#\">Read more</a></p>\n              </div>\n              <div id=\"slide-content-5\">\n                <h2>Slider Six</h2>\n                <p>Lorem Ipsum Dolor</p>\n                <p class=\"sub-text\">October 24 2012 - <a href=\"#\">Read more</a></p>\n              </div>\n            </div>\n          </div>\n          <div class=\"hidden-phone\" id=\"slider-thumbs\">\n            <div class=\"span8\">\n              <!-- Bottom switcher of slider -->\n              <ul class=\"thumbnails\">\n                <li class=\"span2\">\n                  <a class=\"thumbnail\" id=\"carousel-selector-0\">\n                    <img src=\"http://placehold.it/170x100&text=one\" />\n                  </a>\n                </li>\n                <li class=\"span2\">\n                  <a class=\"thumbnail\" id=\"carousel-selector-1\">\n                    <img src=\"http://placehold.it/170x100&text=two\" />\n                  </a>\n                </li>\n                <li class=\"span2\">\n                  <a class=\"thumbnail\" id=\"carousel-selector-2\">\n                    <img src=\"http://placehold.it/170x100&text=three\" />\n                  </a>\n                </li>\n                <li class=\"span2\">\n                  <a class=\"thumbnail\" id=\"carousel-selector-3\">\n                    <img src=\"http://placehold.it/170x100&text=four\" />\n                  </a>\n                </li>\n                <li class=\"span2\">\n                  <a class=\"thumbnail\" id=\"carousel-selector-4\">\n                    <img src=\"http://placehold.it/170x100&text=five\" />\n                  </a>\n                </li>\n                <li class=\"span2\">\n                  <a class=\"thumbnail\" id=\"carousel-selector-5\">\n                    <img src=\"http://placehold.it/170x100&text=six\" />\n                  </a>\n                </li>\n              </ul>\n            </div>\n          </div>\n        </div>\n    </div>\n    <div class=\"tab-pane\" id=\"tab2\">\n      <p>Howdy, I'm in Section 2.</p>\n    </div>\n    <div class=\"tab-pane\" id=\"tab3\">\n      <p>Howdy, I'm in Section 3.</p>\n    </div>\n    <div class=\"tab-pane\" id=\"tab4\">\n      <p>Howdy, I'm in Section 4.</p>\n    </div>\n    <div class=\"tab-pane\" id=\"tab5\">\n      <p>Howdy, I'm in Section 5.</p>\n    </div>\n  </div>\n</div>\n\n<!--<div class=\"thumbnail\" style=\"height: 350px;\">\n    <div class=\"row-fluid\" style=\"margin-bottom: 3%;\">\n        <div class=\"span12\" style=\"\n                                color: #FFFFFF;border: 1px solid #D4D4D4;\n                                border-radius: 4px 4px 4px 4px;\n                                box-shadow: 0 1px 4px rgba(0, 0, 0, 0.067);\n                                background-color: ";
+    if (stack1 = helpers.theme_color) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
+    else { stack1 = depth0.theme_color; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
+    buffer += escapeExpression(stack1)
+      + ";\n                                #background-image: linear-gradient(to bottom, #F2F2F2, #CC4400);\n                                background-repeat: repeat-x;\n                                padding-top: 5px;\n        \">\n            <p class=\"text-center lead\" style=\"margin: 0px;\">";
+    if (stack1 = helpers.title) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
+    else { stack1 = depth0.title; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
+    buffer += escapeExpression(stack1)
+      + "</p>\n        </div>\n    </div>\n    <div class=\"row-fluid\" style=\"height: 80%; overflow-x: hidden; overflow-y: auto; padding-right: 5px;\">\n        ";
+    stack1 = helpers.each.call(depth0, depth0.articles, {hash:{},inverse:self.noop,fn:self.program(1, program1, data),data:data});
+    if(stack1 || stack1 === 0) { buffer += stack1; }
+    buffer += " \n        <div class=\"span12 thumbnail\" style=\"height: 125px; margin: 0px;\">\n            <div class=\"span4\">\n                <a href=\""
+      + escapeExpression(((stack1 = depth0.link),typeof stack1 === functionType ? stack1.apply(depth0) : stack1))
+      + "\"><img src=\""
+      + escapeExpression(((stack1 = depth0.img),typeof stack1 === functionType ? stack1.apply(depth0) : stack1))
+      + "http://placehold.it/320x200\" alt=\"ALT NAME\"/></a>\n            </div>\n            <div class=\"caption span6\">\n                <p >"
+      + escapeExpression(((stack1 = depth0.resume),typeof stack1 === functionType ? stack1.apply(depth0) : stack1))
+      + "</p>\n            </div>\n            <div class=\"span2\" style=\"height: 100%; position: relative;\">\n                <p class=\"text-center\" style=\"position: absolute; top: 50%; margin-top: -15px; height: 30px; width: 100%;\"> 10/20 </a>\n            </div>\n        </div>\n        <div class=\"span12\" ></div>\n               \n    </div>\n    <div class=\"row-fluid\">\n        <div class=\"span12\">\n        </div>\n    </div>\n</div>-->\n    \n    \n    \n    \n<!--\n      <img src=\"http://placehold.it/320x200\" alt=\"ALT NAME\" />\n      <div class=\"caption\">\n        <h3>Header Name</h3>\n        <p>Description</p>\n        <p align=\"center\"><a href=\"http://bootsnipp.com/\" class=\"btn btn-primary btn-block\">Open</a></p>\n      </div>\n    </div>\n-->";
+    return buffer;
+    });
+});
+window.require.register("views/templates/modInfoBackUp", function(exports, require, module) {
   module.exports = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
     this.compilerInfo = [2,'>= 1.0.0-rc.3'];
   helpers = helpers || Handlebars.helpers; data = data || {};
