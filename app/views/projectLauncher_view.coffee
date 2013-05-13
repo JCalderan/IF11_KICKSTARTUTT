@@ -1,6 +1,6 @@
 template = require 'views/templates/projectLauncher'
 View = require 'views/base/view'
-simpleObjectCollection = require 'models/simpleObject_collection'
+#simpleObjectCollection = require 'models/simpleObject_collection'
 
 mediator = require "mediator"
 
@@ -13,16 +13,25 @@ module.exports = class ProjectItemView extends View
   
   #custom attributes
   projectState: 0
+  state : ''
+  errors : true
   now: null
   deadline: null
-  state : ''
+  imageReader : null
+  attrToSave: null
   
   initialize: ->
     super
     #custom init
-    nowTemp = new Date();
-    @now = new Date(nowTemp.getFullYear(), nowTemp.getMonth(), nowTemp.getDate(), 0, 0, 0, 0);
     @state = ["creation", "incubation", "campagne", "fin"][(if @model.get("state") then @model.get("state") else 0 )]
+    nowTemp = new Date()
+    @now = new Date(nowTemp.getFullYear(), nowTemp.getMonth(), nowTemp.getDate(), 0, 0, 0, 0)
+    @imageReader = new FileReader()
+    @imageReader.onloadend = (e)=>
+        imgElem = $(@el).find("#project_thumbnail")
+        imgElem.attr("src", e.target.result)
+    console.log @imageReader.result
+    @attrToSave = {}
     
     #event handler
     @listenTo @model, "change", @render
@@ -33,6 +42,7 @@ module.exports = class ProjectItemView extends View
     @delegate "keyup", "#project_title_input", @checkTitle
     @delegate "changeDate", "#datePicker", @setDeadline
     @delegate "show", "#validateInfo", @loadValidateInfoContent
+    @delegate "click", "#save_change_button", @validate
   
   render: =>
     super
@@ -51,11 +61,11 @@ module.exports = class ProjectItemView extends View
     elem = $(event.target)
     if elem.is('.project_attr')
         elem.hide()
-        elem.parent().find(".project_attr_input").val(elem.html()).show()
+        elem.parent().find(".project_attr_input").val(elem.text()).show()
     else if elem.is('.project_attr_input')
         new_val = elem.val()
         elem.hide()
-        if new_val!="" then elem.parent().find(".project_attr").html(new_val)
+        if new_val!="" then elem.parent().find(".project_attr").html(new_val) else elem.val(elem.parent().find(".project_attr").text())
         elem.parent().find(".project_attr").show()
         
   setProjectThumbnail: (event)->
@@ -64,11 +74,8 @@ module.exports = class ProjectItemView extends View
     
   showProjectThumbnail: (event)->
     file = event.target.files[0]
-    imgElem = $(@el).find("#project_thumbnail")
-    reader = new FileReader()
-    reader.readAsDataURL(file)
-    reader.onloadend = (e)->
-        imgElem.attr("src", e.target.result)
+    if file.type.match("image\/(jpeg|png|gif|tiff)") && file.type.match("image\/(jpeg|png|gif|tiff)")[0] == file.type
+        @imageReader.readAsDataURL(file)
         
   checkTitle: (event)->
     elem = $(event.target)
@@ -101,38 +108,64 @@ module.exports = class ProjectItemView extends View
     elem.parent().find("small").html(info).append(tooltip).show()
     
   loadValidateInfoContent: (event)->
+    @errors = false
     elem = $(@el).find("#validateInfo")
     content = elem.find(".modal-body")
     content.html("")
-    errors = false
+    info_container = $("<div>")
+    warning_container = $("<div>")
+    error_container = $("<div>")
     switch @state
         when "creation"
             content.append($("<p>", "text": "Valider la création du projet ?"))
             warning_info = $("<p>", "class": "text-warning", "text": " vous ne pourrez plus modifier le titre de votre projet.").prepend($("<i>", "class": "icon-warning-sign"))
-            content.append(warning_info)
+            warning_container.append(warning_info)
+            if $("#project_title_input").val().length == 0 || $("#project_title_input").val() == $("#project_title_input").attr("placeholder")
+                error_title = $("<p>", "class": "text-error", "text": " Vous devez donner un titre à votre projet avant de continuer.").prepend($("<i>", "class": "icon-ban-circle"))
+                error_container.append(error_title)
+                @errors = true
+            else if $("#project_header").hasClass("error")
+                error_title = $("<p>", "class": "text-error", "text": " Ce titre de projet n'est pas disponible, modifiez le avant de continuer.").prepend($("<i>", "class": "icon-ban-circle"))
+                error_container.append(error_title)
+                @errors = true
+            else
+                info_title = $("<p>", "class": "text-info", "text": " titre : "+$('#project_title_input').val())
+                @attrToSave["nom_projet"] = $('#project_title_input').val()
+                info_container.append(info_title)                
             if $("#project_description_input").val() == ""
                 warning_description = $("<p>", "class": "text-warning", "text": " Aucune description pour votre projet, vous pourrez l'éditer par la suite.").prepend($("<i>", "class": "icon-warning-sign"))
-                content.append(warning_description)
+                warning_container.append(warning_description)
+            else
+                info_description = $("<p>", "class": "text-info", "text": " description : "+$('#project_description_input').val())
+                info_container.append(info_description)
+                @attrToSave["description_projet"] = $("#project_description_input").val()
+                
             if @deadline == null || (@now-@deadline) == 0
-                warning_deadline = $("<p>", "class": "text-warning", "text": " Vous n'avez définit aucune deadline pour votre projet.").prepend($("<i>", "class": "icon-warning-sign"))
-                content.append(warning_deadline)
-            if $("#project_title_input").val() == "" || $("#project_title_input").val() == "Titre du projet"
-                error_title = $("<p>", "class": "text-error", "text": " Vous devez donner un titre à votre projet avant de continuer.").prepend($("<i>", "class": "icon-ban-circle"))
-                content.append(error_title)
-                errors = true
-            if $("#project_header").hasClass("error")
-                error_title = $("<p>", "class": "text-error", "text": " Ce titre de projet n'est pas disponible, modifiez le avant de continuer.").prepend($("<i>", "class": "icon-ban-circle"))
-                content.append(error_title)
-                errors = true
+                warning_deadline = $("<p>", "class": "text-warning", "text": " Aucune deadline pour votre projet, vous pourrez l'éditer par la suite.").prepend($("<i>", "class": "icon-warning-sign"))
+                warning_container.append(warning_deadline)
+            else
+                deltaTime = Math.round((@deadline - @now) / 1000 / 60 / 60 / 24)
+                info_deadline = $("<p>", "class": "text-info", "text": " #{deltaTime} jour"+(if deltaTime > 1 then "s" else "")+" restant")
+                info_container.append(info_deadline)
+                @attrToSave["deadline_projet"] = @deadline.valueOf()
+            if !@imageReader.result
+                warning_thumbnail = $("<p>", "class": "text-warning", "text": " Aucune image pour votre projet, vous pourrez l'éditer par la suite.").prepend($("<i>", "class": "icon-warning-sign"))
+                warning_container.append(warning_thumbnail)
+            else
+                @attrToSave["thumbnails_projet"] = []
+                @attrToSave["thumbnails_projet"].push(@imageReader.result)
         when "incubation" then ""
         when "campagne" then ""
         when "fin" then ""
         else
             return "Error"
-    if errors
+    if @errors
         elem.find(".modal-footer").find(".btn-primary").attr("disabled", "disabled")
     else
         elem.find(".modal-footer").find(".btn-primary").removeAttr("disabled")
-    
-  validateStep: (event)->
-    event.preventDefault()
+    content.append(info_container, $("<hr>"), warning_container, $("<hr>"), error_container)
+ 
+  validate: (event)->
+    if !@errors
+        @model.set(@attrToSave)
+        @model.save()

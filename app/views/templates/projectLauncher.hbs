@@ -8,14 +8,14 @@
 </div>
 <div id="project_header" class="row-fluid control-group">
     <h3 id="project_title" class="span6">
-        <input id="project_title_input" class="project_attr_input" type="text" placeholder="Titre du projet" style="display: none;"/>
+        <input id="project_title_input" class="project_attr_input" type="text" placeholder="Titre du projet" style="display: none;" value=""/>
         <strong class="project_attr" id="project_title">Titre du projet</strong>
         <small>, par <a href="#">auteur</a></small>
     </h3>
     <h3 class="span6 text-right">
         <small class="text-info project_attr">
             0 jour restant
-            <a href="#" id="tp_toolTip" data-original-title="Définir une nouvelle deadline">
+            <a href="#" id="tp_toolTip">
                 &nbsp;<i class="icon-time"></i>
             </a>
         </small>
@@ -29,7 +29,7 @@
     <div class="bs-docs-example">
         <ul class="nav nav-tabs">
             <li class="active"><a data-toggle="tab" href="#home"><i class="icon-list-alt"></i> Accueil</a></li>
-            <li class=""><a data-toggle="tab" href="#news"><i class="icon-envelope"></i> News</a></li>
+            <li class=""><a data-toggle="tab" href="#news"><i class="icon-envelope"></i> Membres</a></li>
             <li class=""><a data-toggle="tab" href="#comments"><i class="icon-comment"></i> Commentaires</a></li>
         </ul>
         <div class="tab-content">
@@ -87,7 +87,7 @@
     </div>
     <div class="modal-footer">
         <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
-        <button class="btn btn-primary">Save changes</button>
+        <button class="btn btn-primary" id="save_change_button">Save changes</button>
     </div>
 </div>
 

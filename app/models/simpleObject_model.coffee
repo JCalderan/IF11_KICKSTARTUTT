@@ -10,7 +10,7 @@ module.exports = class CommentModel extends Model
     
     initialize: (options)->
         super(options)
-        @url = ()-> "/model/"+@id
+        @url = ()-> "/model/"+(if @id then @id else "")
         @feed = {}
         #@watch(since:"now", filter:"model")    
            

@@ -62,7 +62,5 @@ module.exports = class HomeController extends Controller
         
   launch_project: (params)->
     @view = new SplitPageView(container: '#page_container')
-    model_bidon = new SimpleObjectModel(_id: "9c239d83d9c1d57ec20be93a430017c1")
-    projectLauncher_view = new ProjectLauncher(model: model_bidon, container: '#splitPage_left')
-    model_bidon.fetch()
-    #projectLauncher_view.render();
+    project = new SimpleObjectModel()
+    projectLauncher_view = new ProjectLauncher(model: project, container: '#splitPage_left')
