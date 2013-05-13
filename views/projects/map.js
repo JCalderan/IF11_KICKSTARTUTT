@@ -1,5 +1,5 @@
 function(obj) {
-  if (obj.nom_projet) {
-    emit([obj.nom_projet],obj);
+  if (obj.type == "project") {
+    emit([obj._id],obj);
   }
 };
