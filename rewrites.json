@@ -33,10 +33,7 @@
     "to": "../../:id",
     "method": "PUT, POST, DELETE"
   },
-  {
-    "from":"/model/*",
-    "to": "../../*"
-  },
+
   {
     "to": "_list/top_projects/projects", 
     "from": "top_projects",
@@ -57,5 +54,20 @@
     "query": {
       "key": [":topic"]
     }
-  }
+  },
+  {
+    "from":"/model/*",
+    "to": "../../*",
+    "method": "GET"
+  },
+  {
+    "to": "_update/create_project",
+    "from" : "/model",
+    "method" : "POST"
+  },
+  {
+      "to": "_list/test/projects",
+      "from": "test",
+      "method": "GET"
+  }   
 ]
