@@ -1,9 +1,16 @@
 function(old, req) {
-    
-    var update = JSON.parse(req.body);
-    
-    var d = new Date();
-    update.updated_at = d.valueOf();
-    
-    return [update, "Projet '"+update.name+"' mis à jour à " + timestamp];
+   
+  var updated = old;
+  
+  var u = JSON.parse(req.body);
+  
+  for(var attribute in updated) {
+    if ( u[attribute] && !(u[attribute].toString() == updated[attribute].toString()) ) {
+      updated[attribute] = u[attribute];
+    }
+  }
+
+  updated.updated_at = new Date().valueOf();
+
+  return [updated, "Project "+updated.name+" updated at " + timestamp ];
 }

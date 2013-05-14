@@ -1,9 +1,16 @@
 function(old, req) {
-    
-  var user = JSON.parse(req.body);
+   
+  var updated = old;
   
-  var d = new Date();
-  user.updated_at = d.valueOf();
+  var u = JSON.parse(req.body);
+  
+  for(var attribute in updated) {
+    if ( u[attribute] && !(u[attribute].toString() == updated[attribute].toString()) ) {
+      updated[attribute] = u[attribute];
+    }
+  }
 
-  return [user, "User modified at " + timestamp ];
+  updated.updated_at = new Date().valueOf();
+
+  return [updated, "User "+updated.name+" "+updated.surname+" modified at " + timestamp ];
 }
