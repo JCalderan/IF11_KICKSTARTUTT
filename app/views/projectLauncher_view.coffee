@@ -31,7 +31,7 @@ module.exports = class ProjectItemView extends View
         imgElem = $(@el).find("#project_thumbnail")
         imgElem.attr("src", e.target.result)
     console.log @imageReader.result
-    @attrToSave = {}
+    @attrToSave = {"type":"project"}
     
     #event handler
     @listenTo @model, "change", @render

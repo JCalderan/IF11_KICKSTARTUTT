@@ -1,26 +1,81 @@
-<div id="project_header" class="row-fluid">
-    <h3><strong><a href="#">Titre du projet</a></strong></h3>
+<div id="project_header" class="row-fluid control-group">
+    <h3 id="project_title" class="span6">
+        <input id="project_title_input" class="project_attr_input" type="text" placeholder="Titre du projet" style="display: none;" value=""/>
+        <strong class="project_attr" id="project_title">{{nom_projet}}</strong>
+        <small>, par <a href="#">auteur</a></small>
+    </h3>
+    <h3 class="span6 text-right">
+        <small class="text-info project_attr">
+            0 jour restant
+            <a href="#" id="tp_toolTip">
+                &nbsp;<i class="icon-time"></i>
+            </a>
+        </small>
+        <div data-date-format="dd-mm-yyyy" data-date="" id="datePicker" class="input-append date project_attr_input" style="display: none;">
+            <input type="text" readonly="" value="" size="16" >
+            <span class="add-on"><i class="icon-calendar"></i></span>
+        </div>
+    </h3>
 </div>
-<div id="project_thumbnail" class="row-fluid">
-    <div class="span12">
-        <a href="#" class="thumbnail"><img src="http://placehold.it/650x250" alt="ALT NAME"/></a>
-    </div>
-</div>
-<div id="project_details" class="row-fluid">
-    <div class="span12">
-        <ul>
-            <li>Lauched by : Name of launcher</li>
-            <li>Date of launch : XX/XX/XX</li> 
-            <li>Deadline : XX/XX/XX/XX</li>
-            <li>Finished : y/n</li>
+<div id="project_body" class="row-fluid">
+    <div class="bs-docs-example">
+        <ul class="nav nav-tabs">
+            <li class="active"><a data-toggle="tab" href="#home"><i class="icon-list-alt"></i> Accueil</a></li>
+            <li class=""><a data-toggle="tab" href="#news"><i class="icon-envelope"></i> Membres</a></li>
+            <li class=""><a data-toggle="tab" href="#comments" id="comments_pill_link"><i class="icon-comment"></i> Commentaires</a></li>
         </ul>
-    </div>
-    <div class="spanX">
-        Members : {{this.auteur}}, member 2, member 3
-    </div>
+        <div class="tab-content">
+            <div id="home" class="tab-pane fade active in">
+                <div class="row-fluid" id="project_content">
+                    <div class="span8">
+                        <div class="row-fluid">
+                            {{#each thumbnails_projet}}
+                                <div class="span12">
+                                    <a class="thumbnail" href="#" ><img id="project_thumbnail" alt="ALT NAME" src="{{this}}"></a>
+                                    <input type="file" id="project_thumbnail_input" style="display: none;"/>
+                                </div>
+                            {{/each}}
+                        </div>
+                        <div class="horizontal_divider row-fluid">&nbsp;</div>
+                        <div class="row-fluid">
+                            <div class="span12">
+                                <p><strong>Description :</strong></p>
+                            </div>
+                        </div>
+                        <div class="row-fluid">
+                            <div class="span12 well">
+                                <textarea id="project_description_input" class="project_attr_input span12" rows="10" style="display: none;" ></textarea>
+                                <p id="project_description" class="project_attr" style="cursor: pointer">
+                                    {{description_projet}}
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="span4" >
+                        <p class="text-center"><strong>Topics & Tags</strong></p>
+                    </div>
+                </div>
+            </div>
+            <div id="news" class="tab-pane fade">
+                <p>Food truck fixie locavore, accusamus mcsweeney's marfa nulla single-origin coffee squid. Exercitation +1 labore velit, blog sartorial PBR leggings next level wes anderson artisan four loko farm-to-table craft beer twee. Qui photo booth letterpress, commodo enim craft beer mlkshk aliquip jean shorts ullamco ad vinyl cillum PBR. Homo nostrud organic, assumenda labore aesthetic magna delectus mollit. Keytar helvetica VHS salvia yr, vero magna velit sapiente labore stumptown. Vegan fanny pack odio cillum wes anderson 8-bit, sustainable jean shorts beard ut DIY ethical culpa terry richardson biodiesel. Art party scenester stumptown, tumblr butcher vero sint qui sapiente accusamus tattooed echo park.</p>
+            </div>
+            <div id="comments" class="tab-pane fade">
+                <div class="row-fluid" id="comments_header">
+                    <div class=""></div>
+                </div>
+                <div class="row-fluid" id="comments_content"></div>
+                
+                
+                <div class="span4 well">
+                    <form accept-charset="UTF-8" action="" method="POST">
+                        <textarea class="span4" id="new_message" name="new_message"
+                        placeholder="Type in your message" rows="5"></textarea>
+                        <h6 class="pull-right">320 characters remaining</h6>
+                        <button class="btn btn-info" type="submit">Post New Message</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+      </div>
+<!--    -->
 </div>
-<div class="row-fluid">
-    <p><strong>Description of the project :</strong></p>
-    <p>Le Lorem Ipsum est simplement du faux texte employé dans la composition et la mise en page avant impression. Le Lorem Ipsum est le faux texte standard de l'imprimerie depuis les années 1500, quand un peintre anonyme assembla ensemble des morceaux de texte pour réaliser un livre spécimen de polices de tex...</p>
-</div>
-    
