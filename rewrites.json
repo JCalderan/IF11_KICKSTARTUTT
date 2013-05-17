@@ -61,11 +61,6 @@
     "method": "GET"
   },
   {
-    "to": "_update/create_project",
-    "from" : "/model",
-    "method" : "POST"
-  },
-  {
       "to": "_list/test/projects",
       "from": "test",
       "method": "GET"
