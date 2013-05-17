@@ -31,7 +31,7 @@
   {
     "from": "/collection/:col_name/:id",
     "to": "../../:id",
-    "method": "PUT, POST, DELETE"
+    "method": ["PUT", "POST", "DELETE"]
   },
 
   {
@@ -58,7 +58,7 @@
   {
     "from":"/model/*",
     "to": "../../*",
-    "method": "GET"
+    "method": ["GET", "PUT", "POST"]
   },
   {
       "to": "_list/test/projects",
