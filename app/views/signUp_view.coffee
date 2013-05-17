@@ -8,10 +8,16 @@ module.exports = class SignUpView extends View
   container: null
   template: template
   
-  #initialize: ->
-  #  super
-  #  @listenTo @model, "change", @render
+  initialize: ->
+    super
+    
+    #event handler
+    @delegate "hide", "#myModal", @signUpHide
 
   render: ->
     super
-    $(@el).find("#myModal").modal keyboard: false
+    $(@el).find("#myModal").modal keyboard:true
+
+  signUpHide: (event)=>
+    event.preventDefault()
+    window.location.replace("/")

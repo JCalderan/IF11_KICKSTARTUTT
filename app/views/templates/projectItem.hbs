@@ -1,14 +1,14 @@
 <div class="projectItem_container">
-  
-<!--  
+<!--
   <style>
-    .pricing-table .plan {
+    .project-thumbnail .plan {
     border-radius: 5px;
     text-align: center;
     background-color: #f3f3f3;
     -moz-box-shadow: 0 0 6px 2px #b0b2ab;
     -webkit-box-shadow: 0 0 6px 2px #b0b2ab;
     box-shadow: 0 0 6px 2px #b0b2ab;
+    margin-top:20px;
     }
     .plan:hover {
     background-color: #fff;
@@ -23,7 +23,7 @@
     -webkit-border-radius: 5px 5px 0 0;
     border-radius: 5px 5px 0 0;
     }
-    .plan-name-bronze {
+    .plan-name-color {
     padding:5px;    
     color: #fff;
     background-color: #663D1E;
@@ -31,23 +31,8 @@
     -webkit-border-radius: 5px 5px 0 0;
     border-radius: 5px 5px 0 0;
     }
-    .plan-name-silver {
-    padding: 20px;
-    color: #fff;
-    background-color: #C0C0C0;
-    -moz-border-radius: 5px 5px 0 0;
-    -webkit-border-radius: 5px 5px 0 0;
-    border-radius: 5px 5px 0 0;
-    }
-    .plan-name-gold {
-    padding: 20px;
-    color: #fff;
-    background-color: #FFD700;
-    -moz-border-radius: 5px 5px 0 0;
-    -webkit-border-radius: 5px 5px 0 0;
-    border-radius: 5px 5px 0 0;
-    }
-    .pricing-table-bronze {
+
+    .project-thumbnail-color {
     padding: 20px;
     color: #fff;
     background-color: #f89406;
@@ -55,25 +40,26 @@
     -webkit-border-radius: 5px 5px 0 0;
     border-radius: 5px 5px 0 0;
     }
-    .pricing-table .plan .plan-name span {
+    .project-thumbnail .plan .plan-name span {
     font-size: 20px;
     }
-    .pricing-table .plan ul {
+    .project-thumbnail .plan ul {
     list-style: none;
     margin: 0;
     -moz-border-radius: 0 0 5px 5px;
     -webkit-border-radius: 0 0 5px 5px;
     border-radius: 0 0 5px 5px;
     }
-    .pricing-table .plan ul li.plan-feature {
+    .project-thumbnail .plan ul li.plan-feature {
     padding: 15px 10px;
     border-top: 1px solid #c5c8c0;
+    text-align:left;
     }
-    .pricing-three-column {
+    .project-three-column {
     margin: 0 auto;
     width: 80%;
     }
-    .pricing-variable-height .plan {
+    .project-variable-height .plan {
     float: none;
     margin-left: 2%;
     vertical-align: bottom;
@@ -90,9 +76,9 @@
     }
   </style>
 
-  <div class="row-fluid pricing-table pricing-three-column">
+  <div class="row-fluid project-thumbnail project-three-column">
     <div class="plan">
-      <div class="plan-name-bronze">
+      <div class="plan-name-color">
         <h4><strong><a href="#" class="toResProject">{{name}}</a></strong></h4>
          <p>
           {{description}}...
@@ -101,25 +87,23 @@
       </div>
       <ul>
         <li class="plan-feature">
-          <i class="icon-tags"></i> Tags :
-                {{#each topics}}
-                    <a href="#" class="toResTags" ><span class="label label-info">{{this}}</span></a> 
-                {{/each}}      
-        </li>
-        <li class="plan-feature">
            <i class="icon-user"></i> by <a href="#">
               {{#each members}}
                 {{#if this.fondateur}}
                   {{this.fondateur.ref_utilisateur}}
                 {{/if}}
               {{/each}}
-              </a> 
-            | <i class="icon-calendar"></i> {{creation_date}}
-            | <i class="icon-comment"></i> <a href="/collection/comments/{{_id}}" class="comments_number" ></a>
-            | <i class="icon-pencil"></i> <a  href="#" >N Contributeurs</a>
-            | <i class="icon-star"></i> Note :
-            <span class="star_rating"></span>
-          <a href="#" class="btn btn-primary btn-plan-select"><i class="icon-white icon-ok"></i> Go !</a>
+              </a><br /> 
+              <i class="icon-calendar"></i> {{creation_date}}
+              <i class="icon-comment"></i> <a href="/collection/comments/{{_id}}" class="comments_number" ></a>
+              <i class="icon-pencil"></i> <a  href="#" >N Contributeurs</a>
+        </li>
+        <li class="plan-feature">
+          <i class="icon-star"></i> Note :  <span class="star_rating"></span>          
+          <i class="icon-tags"></i> Tags :
+          {{#each topics}}
+            <a href="#" class="toResTags" ><span class="label label-info">{{this}}</span></a> 
+          {{/each}}      
         </li>
       </ul>
     </div>
@@ -127,8 +111,6 @@
     
 
 -->
-
-
 
     <div class="projectItem_header row-fluid">
         <div class="span12">
@@ -180,6 +162,5 @@
         </div>
     </div>
     <hr />
-
 
 </div>
