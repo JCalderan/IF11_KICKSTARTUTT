@@ -7,8 +7,8 @@ Documentation des règles de réécriture d'url couchdb, définit dans le fichie
 CouchDB fournit un sytème de récriture d'url coté serveur, permettant notamment de s'affranchir de la syntaxe (lourde) imposée par l'api couchDB, et d'obtenir de "jolie" urls, facilement mémorisable par des humains.
 
 En définissant une simple règle dans le fichier rewrites.json, ainsi qu'un vhost qui redirige 'localhost:5984' vers 'kickstartutt:5984', on obtient le même résultat en appelant les deux url suivantes :
-    - "http://localhost:5984/kickstartutt/_design/kickstartutt/index.html" (url de base fournit par couchdb, pour accèder à notre page d'accueil)
-    - "http://kickstartutt:5984" (url réécrite, permettant d'accéder également à notre page d'accueil)
+- "http://localhost:5984/kickstartutt/_design/kickstartutt/index.html" (url de base fournit par couchdb, pour accèder à notre page d'accueil)
+- "http://kickstartutt:5984" (url réécrite, permettant d'accéder également à notre page d'accueil)
 
 Dans le cadre d'un développement simple pour un forum, ou un petit site web, nous pourrions presque nous arréter là.
     
@@ -18,8 +18,8 @@ C'est une sorte d'url rewritting coté client, puisque l'appel d'une url de type
 Ce document présente les solutions retenues pour rendre compatible ces deux processus d'url rewritting.
     
 Voici ici quelques liens complémentaires :
-    - [documentation sur les 'pretty url' de couchDB](http://docs.couchdb.org/en/latest/pretty_urls.html)
-    - [wiki sur la réécriture d'url dans couchDB](http://wiki.apache.org/couchdb/Rewriting_urls)
+- [Documentation sur les 'pretty url' de couchDB](http://docs.couchdb.org/en/latest/pretty_urls.html)
+- [Wiki sur la réécriture d'url dans couchDB](http://wiki.apache.org/couchdb/Rewriting_urls)
     
 # Rewrites.json
 
@@ -37,8 +37,8 @@ Les url décrites dans "to" sont relative au '_design/document' contenant le rew
 Ainsi "to: '/exemple'" d'un rewrite contenu dans "http://localhost:5984/ma_bd/_design/monDoc" fait référence à l'url : "http://localhost:5984/ma_bd/_design/monDoc/exemple".
     
 Les urls peuvent également contenir des variables, explicite ou implicites :
-    - ":maVariable" fait ainsi référence à une variable nommée "maVariables
-    - "*" fait référence à toute la suite de l'url jusqu'a la fin, sous forme d'une variable (Remarque : '*' ne peut être utilisé qu'en fin d'url)
+- ":maVariable" fait ainsi référence à une variable nommée "maVariables
+- "*" fait référence à toute la suite de l'url jusqu'a la fin, sous forme d'une variable (Remarque : '*' ne peut être utilisé qu'en fin d'url)
     
 Cela permet la création de règles comme ceci :
 
@@ -60,9 +60,9 @@ Remarque : ici "../../" fait référence à la base de donnée, le symbole ".." 
 ### Les règles de gestion des fichiers statiques
 
 Notre application compilée par brunch comporte deux fichiers javascript, et un fichier css, qui doivent être accessible à tous moment dans l'application :
-    - vendor.js : contient l'ensemble des librairies javascripts nécessaire au fonctionnement de l'application.
-    - app.js : contient l'ensemble du code javascript spécifique à l'application
-    - bootstrapp.css : contient les classes de style bootstrap nécessaires à la mise en forme de l'application
+- vendor.js : contient l'ensemble des librairies javascripts nécessaire au fonctionnement de l'application.
+- app.js : contient l'ensemble du code javascript spécifique à l'application
+- bootstrapp.css : contient les classes de style bootstrap nécessaires à la mise en forme de l'application
 
 En effet Chaplin.js étant un framework javascript, l'ensemble de sont processus d'url rewritting est codé dans le fichier vendor.js.
 De plus, Chaplin.js implique de développer sont application sous formes de modules requirejs, contenu dans app.js et chargée dynamiquement celon les besoins de l'application.
