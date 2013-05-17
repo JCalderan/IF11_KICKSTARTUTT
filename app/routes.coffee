@@ -5,3 +5,4 @@ module.exports = (match) ->
   match 'view/project/:id', 'home#get_project'
   match 'view/signup', 'home#signup'
   match 'view/projectLauncher', 'home#launch_project'
+  match 'view/userProfile', 'home#userProfile'

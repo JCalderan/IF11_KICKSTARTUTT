@@ -11,4 +11,7 @@ module.exports = class SignUpView extends View
   #initialize: ->
   #  super
   #  @listenTo @model, "change", @render
-  #
+
+  render: ->
+    super
+    $(@el).find("#myModal").modal keyboard: false

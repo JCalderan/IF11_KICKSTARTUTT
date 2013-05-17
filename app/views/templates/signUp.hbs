@@ -1,45 +1,46 @@
-<form id="signup" class="form-horizontal well">
-    <fieldset>
-        <!-- Sign up form -->
-
-        <div id="legend">
-            <legend class="">Sign Up !</legend>
-        </div>
-
-        <!-- identifiant input-->
-        <div class="control-group">
+<div class="modal small hide fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+        <h3 id="myModalLabel">Sign Up !</h3>
+    </div>
+    <div class="modal-body">
+        
+      <form id="signup" class="form-horizontal">
+        <fieldset>
+          <!-- identifiant input-->
+          <div class="control-group">
             <label class="control-label">Identifiant</label>
             <div class="controls">
                 <input id="identifiant" name="identifiant" type="text" placeholder="identifiant" class="input-xlarge">
                 <p class="help-block"></p>
             </div>
-        </div>
-        <!-- password input-->
-        <div class="control-group">
+          </div>
+          <!-- password input-->
+          <div class="control-group">
             <label class="control-label">Mot de passe</label>
             <div class="controls">
                 <input id="password" name="password" type="password" placeholder="Mot de passe" class="input-xlarge">
                 <p class="help-block"></p>
             </div>
-        </div>    
-        <!-- nom input-->
-        <div class="control-group">
+          </div>    
+          <!-- nom input-->
+          <div class="control-group">
             <label class="control-label">Nom</label>
             <div class="controls">
                 <input id="Nom" name="Nom" type="text" placeholder="Nom" class="input-xlarge">
                 <p class="help-block"></p>
             </div>
-        </div>
-        <!-- prenom input-->
-        <div class="control-group">
+          </div>
+          <!-- prenom input-->
+          <div class="control-group">
             <label class="control-label">Prénom</label>
             <div class="controls">
                 <input id="prenom" name="prenom" type="text" placeholder="prenom" class="input-xlarge">
                 <p class="help-block"></p>
             </div>
-        </div>
-        <!-- type select -->
-        <div class="control-group">
+          </div>
+          <!-- type select -->
+          <div class="control-group">
             <label class="control-label">Type</label>
             <div class="controls">
                 <select id="type" name="type" class="input-xlarge">
@@ -50,12 +51,12 @@
                     <option value="Exterieur">Extérieur</option>
                 </select>
             </div>
-        </div>
+          </div>
         
-        <p> /!\ Faire apparaitre le choix de branche et de niveau quand étudiant est selectionné /!\</p>
+          <p> /!\ Faire apparaitre le choix de branche et de niveau quand étudiant est selectionné /!\</p>
         
-        <!-- type select -->
-        <div class="control-group">
+          <!-- type select -->
+          <div class="control-group">
             <label class="control-label">Branche</label>
             <div class="controls">
                 <select id="branche" name="branche" class="input-xlarge">
@@ -79,34 +80,35 @@
                     <option value="Exterieur">8</option>
                 </select>
             </div>
-        </div>
+          </div>
         
-        <!-- email input-->
-        <div class="control-group">
+          <!-- email input-->
+          <div class="control-group">
             <label class="control-label">Email</label>
             <div class="controls">
                 <input id="email" name="email" type="text" placeholder="email" class="input-xlarge">
                 <p class="help-block"></p>
             </div>
-        </div>
+          </div>
         
-        <!-- telephone input-->
-        <div class="control-group">
+          <!-- telephone input-->
+          <div class="control-group">
             <label class="control-label">Téléphone</label>
             <div class="controls">
                 <input id="telephone" name="telephone" type="text" placeholder="Téléphone" class="input-xlarge">
                 <p class="help-block"></p>
             </div>
-        </div>
-        
-        <!-- Submit -->
-        <div class="control-group">
+          </div> 
+          </div>
+          <div class="modal-footer">
+            <!-- Submit -->
+          <div class="control-group">
             <div class="controls">
-                <button type="submit" class="btn">Get started !</button>
+                <button type="submit" class="btn btn-success">Get started !</button>
                 <p class="help-block"></p>
             </div>
-        </div>
-    </fieldset>
-</form>
-
-<a href="#" id="test">lala</a>
+          </div>      
+          </div>
+          </fieldset>
+      </form> 
+</div>

@@ -19,7 +19,7 @@ module.exports = class ModInfoView extends View
     #When the carousel slides, auto update the text
     @delegate 'slid', "#myCarousel", @carouselUpdateText
     
-  render: =>
+  render: ->
     super
     $(@el).find("#myCarousel").carousel interval: 5000
     $(@el).find("#carousel-text").html $(@el).find("#slide-content-0").html()

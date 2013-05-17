@@ -16,6 +16,8 @@ SignUpView = require 'views/signUp_view'
 
 ProjectLauncher = require 'views/projectLauncher_view'
 
+UserProfile = require 'views/userProfile_view'
+
 module.exports = class HomeController extends Controller
 
   index: ->
@@ -64,3 +66,6 @@ module.exports = class HomeController extends Controller
     @view = new SplitPageView(container: '#page_container')
     project = new SimpleObjectModel()
     projectLauncher_view = new ProjectLauncher(model: project, container: '#splitPage_left')
+
+  userProfile: (params)->
+    @view = new UserProfile(container: '#page_container')
