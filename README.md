@@ -21,6 +21,10 @@ KICKSTARTUTT use the [Brunch](http://brunch.io) 'skeleton' [Brunch of Champions]
 - [couchapp](https://github.com/couchapp/couchapp)
 - or any other tools that help you to create web application through Couchdb
 
+### Documentation
+
+See the documentation [here](https://github.com/JCalderan/IF11_KICKSTARTUTT/blob/master/documentation.md)
+
 ## Getting started
 
 We assume that you already have git, node.js, brunch, couchdb, and couchapp installed and set up on your computer.
