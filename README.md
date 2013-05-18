@@ -23,7 +23,7 @@ KICKSTARTUTT use the [Brunch](http://brunch.io) 'skeleton' [Brunch of Champions]
 
 ### Documentation
 
-See the documentation [here](https://github.com/JCalderan/IF11_KICKSTARTUTT/blob/master/documentation.md)
+See the documentation [here](https://github.com/JCalderan/IF11_KICKSTARTUTT/blob/master/doc/documentation.md)
 
 ## Getting started
 
