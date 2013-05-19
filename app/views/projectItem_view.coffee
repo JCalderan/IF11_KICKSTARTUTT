@@ -24,7 +24,6 @@ module.exports = class ProjectItemView extends View
   
   render: =>
     super
-    @setProjectLinks()
     @setRaty()
     
   setRaty: =>
@@ -33,11 +32,4 @@ module.exports = class ProjectItemView extends View
     raty_el.raty("set", @raty_img)
     raty_el.raty("score", if @model.attributes.note_moyenne then (@model.attributes.note_moyenne*0.25) else 0)
     raty_el.raty('readOnly', true)
-    
-  setProjectLinks: =>
-    $(@el).find(".toResProject").attr("href", "/view/project/"+@model.attributes._id)
-    $(@el).find(".toResTags").each(
-        ->
-            $(@).attr("href", "/col/projets_by_topic/"+$(@).text())
-    )
         

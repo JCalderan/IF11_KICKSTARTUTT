@@ -114,16 +114,16 @@
 
     <div class="projectItem_header row-fluid">
         <div class="span12">
-            <h4><strong><a href="#" class="toResProject">{{name}}</a></strong></h4>
+            <h4><strong><a href="#" class="toResProject">{{nom_projet}}</a></strong></h4>
         </div>
     </div>
     <div class="projectItem_body row-fluid">
         <div class="span3">
-            <a href="#" class="toResProject thumbnail"><img src="http://placehold.it/260x180" alt="ALT NAME"/></a>
+            <a href="/view/project/{{_id}}" class="toResProject thumbnail"><img src="http://placehold.it/260x180" alt="ALT NAME"/></a>
         </div>
         <div class="span6">
             <p>
-                {{description}}...
+                {{description_projet}}...
             </p>
             <a href="#" class="toResProject">Read More</a>
         </div>
@@ -131,7 +131,7 @@
             <p><i class="icon-tags"></i> Tags :</p>
             <p>
                 {{#each topics}}
-                    <a href="#" class="toResTags" ><span class="label label-info">{{this}}</span></a> 
+                    <a href="/col/projects_by_topic/{{this}}" class="toResTags" ><span class="label label-info">{{this}}</span></a> 
                 {{/each}}
             </p>
         </div>
