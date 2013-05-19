@@ -1,0 +1,14 @@
+template = require 'views/templates/user'
+View = require 'views/base/view'
+mediator = require 'mediator'
+
+module.exports = class UserView extends View
+  autoRender: true
+  className: 'UserView'
+  container: null
+  template: template
+  
+  #initialize: ->
+  #  super
+  #  @listenTo @model, "change", @render
+  #
