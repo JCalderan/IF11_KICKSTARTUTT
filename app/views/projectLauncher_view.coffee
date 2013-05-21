@@ -14,6 +14,7 @@ module.exports = class ProjectItemView extends View
   #custom attributes
   projectState: 0
   state : ''
+  state_list : ["creation", "incubation", "campagne", "fin"]
   errors : true
   now: null
   deadline: null
@@ -23,7 +24,7 @@ module.exports = class ProjectItemView extends View
   initialize: ->
     super
     #custom init
-    @state = ["creation", "incubation", "campagne", "fin"][(if @model.get("state") then @model.get("state") else 0 )]
+    @state = @state_list[( if @model.get("state") then @model.get("state") else 0 )]
     nowTemp = new Date()
     @now = new Date(nowTemp.getFullYear(), nowTemp.getMonth(), nowTemp.getDate(), 0, 0, 0, 0)
     @imageReader = new FileReader()
@@ -34,7 +35,6 @@ module.exports = class ProjectItemView extends View
     @attrToSave = {"type":"project"}
     
     #event handler
-    @listenTo @model, "change", @render
     @delegate "click", ".project_attr", @toogleProjectAttr
     @delegate "blur", ".project_attr_input", @toogleProjectAttr
     @delegate "click", "#project_thumbnail", @setProjectThumbnail
@@ -43,6 +43,7 @@ module.exports = class ProjectItemView extends View
     @delegate "changeDate", "#datePicker", @setDeadline
     @delegate "show", "#validateInfo", @loadValidateInfoContent
     @delegate "click", "#save_change_button", @validate
+    @listenTo @model, "change", @render
   
   render: =>
     super
@@ -58,10 +59,12 @@ module.exports = class ProjectItemView extends View
     $(@el).find("#tab_home").addClass("active")
     switch @state
         when "creation"
-            $(@el).find("#tab_members a").removeAttr("data-toggle").attr("href":"#").css("cursor": "auto").addClass("muted")
-            $(@el).find("#tab_comments a").removeAttr("data-toggle").attr("href":"#").css("cursor": "auto").addClass("muted")
+            $(@el).find("#tab_members a").removeAttr("data-toggle").attr("href":"#").css("cursor": "default").addClass("muted")
+            $(@el).find("#tab_comments a").removeAttr("data-toggle").attr("href":"#").css("cursor": "default").addClass("muted")
+            if @model.get("id")
+                window.location.pathname = "view/project/edit/#{@model.get('id')}"
         when "incubation"
-            $(@el).find("#tab_comments a").removeAttr("data-toggle").attr("href":"#").css("cursor": "auto").addClass("muted")
+            $(@el).find("#tab_comments a").removeAttr("data-toggle").attr("href":"#").css("cursor": "default").addClass("muted")
         else
             return 0
  
@@ -178,5 +181,8 @@ module.exports = class ProjectItemView extends View
  
   validate: (event)->
     if !@errors
+        #on passe à l'etape suivante
+        @attrToSave["state"] = @state_list.indexOf(@state) + 1
+        #on sauvegarde
         @model.set(@attrToSave)
         @model.save()
