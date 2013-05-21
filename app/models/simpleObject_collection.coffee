@@ -17,5 +17,6 @@ module.exports = class ProjectsCol extends Collection
             url = tmp_url
             
   parse: (data)->
+    console.log(data.rows)
     return if data.rows then data.rows else data
 

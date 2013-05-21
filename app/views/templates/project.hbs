@@ -61,19 +61,16 @@
             </div>
             <div id="comments" class="tab-pane fade">
                 <div class="row-fluid" id="comments_header">
-                    <div class=""></div>
+                    <div class="span12 well">
+                        <h4>Postez un commentaire</h4>
+                        <form accept-charset="UTF-8" action="/model" method="POST" id="new_comment_form">
+                            <textarea class="span12" id="new_comment_input" name="new_comment_input" placeholder="Type in your message" rows="5"></textarea>
+                            <h6 class="pull-right"><span id="comment_char_remaining" >320</span> caractères restant</h6>
+                            <button class="btn btn-info" type="submit">Post New Message</button>
+                        </form>
+                    </div>
                 </div>
-                <div class="row-fluid" id="comments_content"></div>
-                
-                
-                <div class="span4 well">
-                    <form accept-charset="UTF-8" action="" method="POST">
-                        <textarea class="span4" id="new_message" name="new_message"
-                        placeholder="Type in your message" rows="5"></textarea>
-                        <h6 class="pull-right">320 characters remaining</h6>
-                        <button class="btn btn-info" type="submit">Post New Message</button>
-                    </form>
-                </div>
+                <div class="row-fluid" id="comments_list"></div>
             </div>
         </div>
       </div>
