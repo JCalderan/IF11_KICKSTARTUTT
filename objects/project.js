@@ -3,10 +3,10 @@
    "name": "Serious Game",
    "type_projet": "TX",
    "studies_level": "bac+4",
-   "description": "Création d'un serious game tournant à l'aide d'un moteur 3D",
+   "description": "Crï¿½ation d'un serious game tournant ï¿½ l'aide d'un moteur 3D",
    "creation_date": "Thu May 02 2013 09:45:24 GMT+0200",
    "end_date": "Thu May 09 2013 09:45:24 GMT+0200",//new Date(); t.valueOf();
-   "state": "XXXXX",//creation,incubation,campagne,fin
+   "state": 0,// 0 Ã  3 pour creation,incubation,campagne,fin 
    "members": [
        {
            "id_user": "XXXXX",
