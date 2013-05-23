@@ -24,14 +24,13 @@ module.exports = class ProjectItemView extends View
   initialize: ->
     super
     #custom init
-    @state = @state_list[( if @model.get("state") then @model.get("state") else 0 )]
     nowTemp = new Date()
     @now = new Date(nowTemp.getFullYear(), nowTemp.getMonth(), nowTemp.getDate(), 0, 0, 0, 0)
     @imageReader = new FileReader()
     @imageReader.onloadend = (e)=>
         imgElem = $(@el).find("#project_thumbnail")
         imgElem.attr("src", e.target.result)
-    console.log @imageReader.result
+    #console.log @imageReader.result
     @attrToSave = {"type":"project"}
     
     #event handler
@@ -47,22 +46,25 @@ module.exports = class ProjectItemView extends View
   
   render: =>
     super
-    $(@el).find("#datePicker").datepicker(onRender: (date)=>
-        if date.valueOf() < @now.valueOf()
-            return "disabled"
-        else
-            return ''
-    ).datepicker("setValue", @now)
+    #on definit le nouvel etat de la vue : devrait être fait cote model,
+    #mais on en à besoin ici pour la persistance de l'affichage (notemment lorsqu'il faut incremente l'etat par rapport au precedant)
+    @state = @state_list[( if @model.get("state") then @model.get("state") else 0 )]
+    
     $(@el).find("#tp_toolTip").tooltip("title":"définir une nouvelle deadline")
     $(@el).find(".project_attr").css("cursor": "pointer")
     $(@el).find("#pill_#{@state}").addClass("active")
+    #console.log("#pill_#{@state} should be active")
     $(@el).find("#tab_home").addClass("active")
     switch @state
         when "creation"
             $(@el).find("#tab_members a").removeAttr("data-toggle").attr("href":"#").css("cursor": "default").addClass("muted")
             $(@el).find("#tab_comments a").removeAttr("data-toggle").attr("href":"#").css("cursor": "default").addClass("muted")
-            if @model.get("id")
-                window.location.pathname = "view/project/edit/#{@model.get('id')}"
+            $(@el).find("#datePicker").datepicker(onRender: (date)=>
+                if date.valueOf() < @now.valueOf()
+                    return "disabled"
+                else
+                    return ''
+            ).datepicker("setValue", @now)
         when "incubation"
             $(@el).find("#tab_comments a").removeAttr("data-toggle").attr("href":"#").css("cursor": "default").addClass("muted")
         else
@@ -103,7 +105,7 @@ module.exports = class ProjectItemView extends View
         data.rows.forEach((row)->
             result.push(row.key)
         )
-        console.log(result)
+        #console.log(result)
         if result.length > 0
             elem.parents("#project_header").addClass("error")
         else
@@ -129,7 +131,7 @@ module.exports = class ProjectItemView extends View
     error_container = $("<div>")
     switch @state
         when "creation"
-            content.append($("<p>", "text": "Valider la création du projet ?"))
+            content.append($("<p>", "text": "Valider la creation du projet ?"))
             warning_info = $("<p>", "class": "text-warning", "text": " vous ne pourrez plus modifier le titre de votre projet.").prepend($("<i>", "class": "icon-warning-sign"))
             warning_container.append(warning_info)
             if $("#project_title_input").val().length == 0 || $("#project_title_input").val() == $("#project_title_input").attr("placeholder")

@@ -13,7 +13,7 @@ module.exports = class ProjectsCol extends Collection
             if options.couchQueryParams
                 tmp_url+="?"
                 tmp_url += for paramKey, paramValue of options.couchQueryParams
-                    "#{paramKey}=#{paramValue}&";
+                    "#{paramKey}=#{paramValue}&"
             url = tmp_url
             
   parse: (data)->
