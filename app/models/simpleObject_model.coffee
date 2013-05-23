@@ -70,3 +70,13 @@ module.exports = class CommentModel extends Model
     parse: (data)->
         return if data.value then data.value else data
     
+    save: (attr, opts={wait:true})=>
+        console.log("save")
+        opts.success = (opts.succeed || (
+            (model, response, options)=>
+                @set("_id":response.id)
+                console.log(response)
+        ))
+        super(attr, opts)
+        
+    

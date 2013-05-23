@@ -8,8 +8,8 @@
 </div>
 <div id="project_header" class="row-fluid control-group">
     <h3 id="project_title" class="span6">
-        {{#if nom_projet}}
-            <strong class="project_attr" id="project_title">{{nom_projet}}</strong>
+        {{#if name}}
+            <strong class="project_attr" id="project_title">{{name}}</strong>
         {{else}}
             <input id="project_title_input" class="project_attr_input" type="text" placeholder="Titre du projet" style="display: none;" value=""/>
             <strong class="project_attr" id="project_title">Titre du projet</strong>   
@@ -23,7 +23,8 @@
                 &nbsp;<i class="icon-time"></i>
             </a>
         </small>
-        {{#if deadline_projet}}
+        {{#if deadline}}
+        {{else}}
             <div data-date-format="dd-mm-yyyy" data-date="" id="datePicker" class="input-append date project_attr_input" style="display: none;">
                 <input type="text" readonly="" value="" size="16" >
                 <span class="add-on"><i class="icon-calendar"></i></span>
@@ -45,8 +46,8 @@
                     <div class="span8">
                         <div class="row-fluid">
                             <div class="span12">
-                                {{#if thumbnails_projet}}
-                                    {{#each thumbnails_projet}}
+                                {{#if thumbnails}}
+                                    {{#each thumbnails}}
                                         <a class="thumbnail" href="#" ><img id="project_thumbnail" alt="ALT NAME" src="{{this}}"></a>
                                     {{/each}}
                                 {{else}}
@@ -64,15 +65,15 @@
                         <div class="row-fluid">
                             <div class="span12 well">
                                 <textarea id="project_description_input" class="project_attr_input span12" rows="10" style="display: none;" >
-                                    {{#if description_projet}}
-                                        {{description_projet}}
+                                    {{#if description}}
+                                        {{description}}
                                     {{else}}
                                         Description de votre projet
                                     {{/if}}
                                 </textarea>
                                 <p id="project_description" class="project_attr" style="cursor: pointer">
-                                    {{#if description_projet}}
-                                        {{description_projet}}
+                                    {{#if description}}
+                                        {{description}}
                                     {{else}}
                                         Description de votre projet
                                     {{/if}}

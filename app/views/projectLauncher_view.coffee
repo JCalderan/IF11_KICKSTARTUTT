@@ -11,6 +11,9 @@ module.exports = class ProjectItemView extends View
   className: "projectLauncher row-fluid well well-small"
   container: null
   
+  listen:
+    'change:_id model': 'reload'
+  
   #custom attributes
   projectState: 0
   state : ''
@@ -26,12 +29,13 @@ module.exports = class ProjectItemView extends View
     #custom init
     nowTemp = new Date()
     @now = new Date(nowTemp.getFullYear(), nowTemp.getMonth(), nowTemp.getDate(), 0, 0, 0, 0)
+    @deadline = new Date(nowTemp.getFullYear(), nowTemp.getMonth(), nowTemp.getDate(), 0, 0, 0, 0)
     @imageReader = new FileReader()
     @imageReader.onloadend = (e)=>
         imgElem = $(@el).find("#project_thumbnail")
         imgElem.attr("src", e.target.result)
     #console.log @imageReader.result
-    @attrToSave = {"type":"project"}
+    @attrToSave = {"type":"project", "thumbnails": []}
     
     #event handler
     @delegate "click", ".project_attr", @toogleProjectAttr
@@ -42,7 +46,7 @@ module.exports = class ProjectItemView extends View
     @delegate "changeDate", "#datePicker", @setDeadline
     @delegate "show", "#validateInfo", @loadValidateInfoContent
     @delegate "click", "#save_change_button", @validate
-    @listenTo @model, "change", @render
+    #@listenTo @model, "change", @reload
   
   render: =>
     super
@@ -105,7 +109,6 @@ module.exports = class ProjectItemView extends View
         data.rows.forEach((row)->
             result.push(row.key)
         )
-        #console.log(result)
         if result.length > 0
             elem.parents("#project_header").addClass("error")
         else
@@ -144,7 +147,6 @@ module.exports = class ProjectItemView extends View
                 @errors = true
             else
                 info_title = $("<p>", "class": "text-info", "text": " "+$('#project_title_input').val()).prepend($("<i>", "class": "icon-pencil"))
-                @attrToSave["nom_projet"] = $('#project_title_input').val()
                 info_container.append(info_title)
                 
             if $("#project_description_input").val() == ""
@@ -154,8 +156,7 @@ module.exports = class ProjectItemView extends View
                 resume_description = " "+ $('#project_description_input').val().substr(0,15) + if $('#project_description_input').val().length > 15 then "..." else ""
                 info_description = $("<p>", "class": "text-info", "text": resume_description).prepend($("<i>", "class": "icon-comment"))
                 info_container.append(info_description)
-                @attrToSave["description_projet"] = $("#project_description_input").val()
-                
+    
             if @deadline == null || (@now-@deadline) == 0
                 warning_deadline = $("<p>", "class": "text-warning", "text": " Aucune deadline pour votre projet, vous pourrez l'éditer par la suite.").prepend($("<i>", "class": "icon-warning-sign"))
                 warning_container.append(warning_deadline)
@@ -163,13 +164,13 @@ module.exports = class ProjectItemView extends View
                 deltaTime = Math.round((@deadline - @now) / 1000 / 60 / 60 / 24)
                 info_deadline = $("<p>", "class": "text-info", "text": " #{deltaTime} jour"+(if deltaTime > 1 then "s" else "")+" restant").prepend($("<i>", "class": "icon-calendar"))
                 info_container.append(info_deadline)
-                @attrToSave["deadline_projet"] = @deadline.valueOf()
+
             if !@imageReader.result
                 warning_thumbnail = $("<p>", "class": "text-warning", "text": " Aucune image pour votre projet, vous pourrez l'éditer par la suite.").prepend($("<i>", "class": "icon-warning-sign"))
                 warning_container.append(warning_thumbnail)
             else
-                @attrToSave["thumbnails_projet"] = []
-                @attrToSave["thumbnails_projet"].push(@imageReader.result)
+                console.log(@imageReader.result)
+
         when "incubation" then ""
         when "campagne" then ""
         when "fin" then ""
@@ -184,7 +185,23 @@ module.exports = class ProjectItemView extends View
   validate: (event)->
     if !@errors
         #on passe à l'etape suivante
-        @attrToSave["state"] = @state_list.indexOf(@state) + 1
+        switch @state
+            when "creation"
+                @attrToSave["state"] = @state_list.indexOf(@state) + 1
+                @attrToSave["name"] = $('#project_title_input').val()
+                @attrToSave["description"] = $("#project_description_input").val()
+                @attrToSave["deadline"] = @deadline.valueOf()
+                @attrToSave["thumbnails"].push(@imageReader.result)
+            else
+                console.log("error ! can't validate data")
         #on sauvegarde
-        @model.set(@attrToSave)
-        @model.save()
+        @model.save(@attrToSave)
+    
+  reload: =>
+    console.log("reload, @model.id = #{@model.id}")
+    console.log(@model)
+    if @model && @model.id
+        window.location.replace("/view/project/editor/#{@model.id}")
+    else
+        console.log("error : can't reload, check model or model.id property")
+        console.log(@model.id)
