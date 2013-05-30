@@ -1,0 +1,84 @@
+ <form class="form-horizontal">
+  <fieldset>
+  <legend>Recherche avancée</legend>
+    <div class="control-group">
+      <label class="control-label" for="inputProjectName">Nom du projet</label>
+      <div class="controls">
+        <input type="text" id="inputProjectName" placeholder="Project">
+      </div>
+    </div>
+    <div class="control-group">
+      <label class="control-label" for="inputMembre">Membre</label>
+      <div class="controls">
+        <input type="text" id="inputMembre" placeholder="Membre">
+      </div>
+    </div>
+      
+      <div class="control-group">
+        <div class="controls">
+          <label class="checkbox inline">
+            <input type="checkbox" id="inlineCheckbox1" value="option1"> ISI
+          </label>
+          <label class="checkbox inline">
+            <input type="checkbox" id="inlineCheckbox2" value="option2"> SRT
+          </label>
+          <label class="checkbox inline">
+            <input type="checkbox" id="inlineCheckbox3" value="option3"> MTE
+          </label>
+          <label class="checkbox inline">
+            <input type="checkbox" id="inlineCheckbox3" value="option3"> SM
+          </label>
+          <label class="checkbox inline">
+            <input type="checkbox" id="inlineCheckbox3" value="option3"> SI
+          </label>
+        </div>
+      </div>
+      <div class="control-group">
+        <label class="control-label" for="datePicker">Date de lancement</label>
+        <div class="controls">
+          <div data-date-format="dd-mm-yyyy" data-date="" id="datePicker" class="input-append date">
+            <input type="text" readonly="" value="" size="16" >
+            <span class="add-on"><i class="icon-calendar"></i></span>
+          </div>
+        </div>
+      </div>
+      <div class="control-group">
+        <label class="control-label" for="datePicker">Deadline</label>
+        <div class="controls">
+          <div data-date-format="dd-mm-yyyy" data-date="" id="datePicker" class="input-append date">
+            <input type="text" readonly="" value="" size="16" >
+            <span class="add-on"><i class="icon-calendar"></i></span>
+          </div>
+        </div>
+      </div>
+      <div class="control-group">
+        <label class="control-label" for="datePicket">Note supérieur à</label>
+        <div class="controls">
+          <select>
+            <option>1</option>
+            <option>2</option>
+            <option>3</option>
+            <option>4</option>
+            <option>5</option>
+          </select>
+        </div>
+      </div>
+      <div class="control-group">
+        <label class="control-label" for="datePicket">Note inférieur à</label>
+        <div class="controls">
+          <select>
+            <option>1</option>
+            <option>2</option>
+            <option>3</option>
+            <option>4</option>
+            <option>5</option>
+          </select>
+        </div>
+      </div>
+      
+    <div class="form-actions">
+      <button type="submit" class="btn btn-primary">Rechercher</button>
+      <button type="cancel" class="btn btn-primary">Cancel</button>
+    </div>
+  </fieldset>
+ </form>

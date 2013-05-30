@@ -4,7 +4,7 @@ mediator = require 'mediator'
 
 module.exports = class UserProfileView extends View
   autoRender: true
-  className: 'UserProfileView'
+  className: 'UserProfileView well well-small'
   container: null
   template: template
   

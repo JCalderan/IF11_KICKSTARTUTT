@@ -3,8 +3,8 @@ ProjectItemView = require 'views/projectItem_view'
 
 module.exports = class ProjectsColView extends CollectionView
   autoRender: true
-  tagname: 'div'
-  className: 'projectCol-view'
+  tagName: 'ul'
+  className: 'projectCol-view thumbnails well well-small'
   container: null
   itemView: ProjectItemView
   

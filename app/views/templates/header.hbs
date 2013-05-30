@@ -1,17 +1,24 @@
 <div class="navbar-inner">
   <div class="container">
-    <a class="brand" href="#">KICKSTARTUTT</a>
-    <div class="nav-collapse">
+    <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </a>
+    <a class="brand" href="/">KICKSTARTUTT</a>
+    <div class="nav-collapse collapse">
       <ul class="nav">
         <li><a href="/"><i class="icon-home icon-white"></i> Home</a></li>
-        <li ><a href="/col/projects/top"><i class="icon-star icon-white"></i> Top Projects</a></li>
+        <!--<li ><a href="/col/projects/top"><i class="icon-star icon-white"></i> Top Projects</a></li>-->
         <li><a href="/col/projects"><i class="icon-list icon-white"></i> All Projects</a></li>
         <li><a href="/view/projectLauncher"><i class="icon-pencil icon-white"></i> Launch your Project</a></li>
+        <li><a href="/view/userProfile"><i class="icon-user icon-white"></i> Profil</a></li>
+        <li><a href="/view/advanceSearch"><i class="icon-search icon-white"></i> Recherche avancée</a></li>
       </ul>
-      <form class="navbar-form form-search span3" id="formSearchProjects">
-          <input id="inputSearchProjects" type="text" style="height: 100%; width: 100%;" class="search-query typeahead" placeholder="Search projects" autocomplete="off"/>
-          <input type="submit" value="search" style="display: none;" />
-<!--        <div class="input-append search" >
+     <!-- <form class="navbar-form form-search" id="formSearchProjects">
+      <input id="inputSearchProjects" type="text" class="search-query typeahead input-medium" placeholder="Search projects" autocomplete="off"/>
+      <input type="submit" value="search" style="display: none;" />
+          <div class="input-append search" >
           <input type="text" style="height: 100%;" class="span2 typeahead"/>
           <div class="btn-group" style="height: 100%;">
             <button tabindex="-1" class="btn">Search</button>
@@ -26,8 +33,8 @@
               <li><a href="#">Separated link</a></li>
             </ul>
           </div>
-        </div>-->
-      </form> 
+        </div>
+      </form>  -->
       <ul class="nav pull-right">
         <li class="dropdown">
           <a data-toggle="dropdown" href="#" class="dropdown-toggle">Sign In <strong class="caret"></strong></a>

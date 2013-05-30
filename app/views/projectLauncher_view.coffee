@@ -8,7 +8,7 @@ module.exports = class ProjectItemView extends View
   #class attributes
   autoRender: true
   template: template
-  className: "projectLauncher row-fluid"
+  className: "projectLauncher row-fluid well well-small"
   container: null
   
   #custom attributes

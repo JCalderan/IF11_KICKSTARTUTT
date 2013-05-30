@@ -3,11 +3,12 @@ View = require 'views/base/view'
 
 mediator = require "mediator"
 
-module.exports = class ProjectItemView extends View
+module.exports = class ProjectIItemView extends View
   #class attributes
   autoRender: true
+  tagName: 'li'
   template: template
-  className: "projectItem span3"
+  className: "projectItem span2"
   container: null
   
   #custom attributes

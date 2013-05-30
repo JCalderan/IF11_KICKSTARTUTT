@@ -10,10 +10,20 @@
   <script src="/brunch/javascripts/vendor.js"></script>
   <script src="/brunch/javascripts/app.js"></script>
   <script>require('initialize');</script>
+  <style>
+    body {
+  padding-top: 100px;
+}
+@media (max-width: 979px) {
+  body {
+    padding-top: 0px;
+  }
+}
+  </style>
 </head>
 <body>
   <div id="header_container"></div>
-  <div id="page_container" class="container" style="position: relative; top: 85px;"></div>
+  <div id="page_container" class="container"></div>
   <div id="footer_container"></div>
 </body>
 </html>

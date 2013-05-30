@@ -1,11 +1,89 @@
-<div class=" row-fluid tabbable">
+<style>
+ .project-thumbnail .plan {
+  border:solid 1px #9EBACC;
+  border-radius: 5px;
+  text-align: center;
+  background-color: #f3f3f3;
+  #-moz-box-shadow: 0 0 6px 2px #b0b2ab;
+  #-webkit-box-shadow: 0 0 6px 2px #b0b2ab;
+  #box-shadow: 0 0 6px 2px #b0b2ab;
+  margin-bottom:10px;
+ }
+ .plan:hover {
+  background-color: #fff;
+  -moz-box-shadow: 0 0 12px 3px #b0b2ab;
+  -webkit-box-shadow: 0 0 12px 3px #b0b2ab;
+  box-shadow: 0 0 12px 3px #b0b2ab;
+ }
+ .plan {
+  color: #ff;
+  background-color: #5e5f59;
+  -moz-border-radius: 5px 5px 0 0;
+  -webkit-border-radius: 5px 5px 0 0;
+  border-radius: 5px 5px 0 0;
+ }
+ .plan-name-color {  
+  color: #fff;
+  -moz-border-radius: 5px 5px 0 0;
+  -webkit-border-radius: 5px 5px 0 0;
+  border-radius: 5px 5px 0 0;
+  background-image:url(http://placehold.it/172x172);
+ }
+  .project-thumbnail-color {
+  padding: 20px;
+  color: #fff;
+  background-color: #f89406;
+  -moz-border-radius: 5px 5px 0 0;
+  -webkit-border-radius: 5px 5px 0 0;
+  border-radius: 5px 5px 0 0;
+ }
+ .project-thumbnail .plan .plan-name span {
+  font-size: xx-small;
+ }
+ .project-thumbnail .plan ul {
+  list-style: none;
+  margin: 0;
+  -moz-border-radius: 0 0 5px 5px;
+  -webkit-border-radius: 0 0 5px 5px;
+  border-radius: 0 0 5px 5px;
+ }
+ .project-thumbnail .plan ul li.plan-feature {
+  padding: 5px 5px;
+  border-top: 1px solid #c5c8c0;
+  text-align:left;
+  font-size:x-small;
+ }
+ .project-three-column {
+  margin: 0 auto;
+ }
+ .plan {
+  float: none;
+  vertical-align: bottom;
+  display: inline-block;
+  *display:inline;
+ }
+ .plan-mouseover .plan-name {
+  background-color: #4e9a06 !important;
+ }
+ .descriptionProjectItem{
+   opacity:0;
+ }
+ .plan:hover .descriptionProjectItem{
+   border-top-left-radius:5px;
+   border-top-right-radius:5px;
+   margin:2px;
+   opacity:1;
+ }    
+</style>
+
+<div class=" row-fluid tabbable well well-small">
   <div class="span2">
     <ul class="nav nav-list">
       <li class="active"><a href="#tab1" data-toggle="tab">Notre sélection</a></li>
       <li><a href="#tab2" data-toggle="tab">Financés</a></li>
       <li><a href="#tab3" data-toggle="tab">Les plus populaires</a></li>
       <li><a href="#tab4" data-toggle="tab">Juste commencés</a></li>
-      <li><a href="#tab5" data-toggle="tab">Bientôt terminés</a></li>
+      <li><a href="#tab5" data-toggle="tab">Bientôt terminés</a><li>
     </ul>
   </div>
   <div class="tab-content span10">
@@ -13,88 +91,665 @@
         <!-- Slider -->
         <div class="row-fluid" id="slider">
           <!-- Top part of the slider -->
-          <div class="span8" id="carousel-bounding-box">
+          <div id="carousel-bounding-box">
             <div id="myCarousel" class="carousel slide">
               <!-- Carousel items -->
               <div class="carousel-inner">
-                <div class="active item" data-slide-number="0"><img src="http://placehold.it/770x300&text=one" /></div>
-                <div class="item" data-slide-number="1"><img src="http://placehold.it/770x300&text=two" /></div>
-                <div class="item" data-slide-number="2"><img src="http://placehold.it/770x300&text=three" /></div>
-                <div class="item" data-slide-number="3"><img src="http://placehold.it/770x300&text=four" /></div>
-                <div class="item" data-slide-number="4"><img src="http://placehold.it/770x300&text=five" /></div>
-                <div class="item" data-slide-number="5"><img src="http://placehold.it/770x300&text=six" /></div>
+                <div class="active item" data-slide-number="0">
+
+                    
+                  <div class="span11" style="padding-top:15px;padding-bottom:15px;margin-left:15px;">
+                    
+                    <div class="projectItem span4" style="opacity: 1;padding-left:20px;margin-top:10px;">  
+                      <div class="projectItem_container">
+                        <div class="project-thumbnail project-three-column">
+                          <div class="plan">
+                            <div class="plan-name-color" style="height:172px;">
+                                <span class="descriptionProjectItem">
+                                  <center>
+                                    Nom du projet<br /><br />
+                                    Description du projet, projet sympa avec des trucs à faire<br />
+                                    <a href="/view/project/{{_id}}">Read more</a>
+                                  </center>
+                                </span>  
+                            </div>
+                            <ul>
+                              <li class="plan-feature">
+                                <i class="icon-user"></i> by <a href="#">
+                                    John Doe
+                                    </a><br /> 
+                                    <i class="icon-calendar"></i> 08/07/2009<br /> 
+                                    <i class="icon-comment"></i> <a href="/collection/comments/{{_id}}" class="comments_number" >48 commentaires</a><br /> 
+                                    <i class="icon-pencil"></i> <a  href="#" >N Contributeurs</a><br /> 
+                              </li>
+                              <li class="plan-feature">
+                                <i class="icon-star"></i> Note :  <span class="star_rating"></span><br />           
+                                <i class="icon-tags"></i> Tags :
+                                <a href="/col/projects_by_topic/{{this}}" class="toResTags" ><span class="label label-info">NoSql</span></a>      
+                              </li>
+                            </ul>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  
+                    <div class="projectItem span4" style="opacity: 1;padding-left:20px;margin-top:10px;">  
+                      <div class="projectItem_container">
+                        <div class="project-thumbnail project-three-column">
+                          <div class="plan">
+                            <div class="plan-name-color" style="height:172px;">
+                                <span class="descriptionProjectItem">
+                                  <center>
+                                    Nom du projet<br /><br />
+                                    Description du projet, projet sympa avec des trucs à faire<br />
+                                    <a href="/view/project/{{_id}}">Read more</a>
+                                  </center>
+                                </span>  
+                            </div>
+                            <ul>
+                              <li class="plan-feature">
+                                <i class="icon-user"></i> by <a href="#">
+                                    John Doe
+                                    </a><br /> 
+                                    <i class="icon-calendar"></i> 08/07/2009<br /> 
+                                    <i class="icon-comment"></i> <a href="/collection/comments/{{_id}}" class="comments_number" >48 commentaires</a><br /> 
+                                    <i class="icon-pencil"></i> <a  href="#" >N Contributeurs</a><br /> 
+                              </li>
+                              <li class="plan-feature">
+                                <i class="icon-star"></i> Note :  <span class="star_rating"></span><br />           
+                                <i class="icon-tags"></i> Tags :
+                                <a href="/col/projects_by_topic/{{this}}" class="toResTags" ><span class="label label-info">NoSql</span></a>      
+                              </li>
+                            </ul>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    
+                    <div class="projectItem span4" style="opacity: 1;padding-left:20px;margin-top:10px;">  
+                      <div class="projectItem_container">
+                        <div class="project-thumbnail project-three-column">
+                          <div class="plan">
+                            <div class="plan-name-color" style="height:172px;">
+                                <span class="descriptionProjectItem">
+                                  <center>
+                                    Nom du projet<br /><br />
+                                    Description du projet, projet sympa avec des trucs à faire<br />
+                                    <a href="/view/project/{{_id}}">Read more</a>
+                                  </center>
+                                </span>  
+                            </div>
+                            <ul>
+                              <li class="plan-feature">
+                                <i class="icon-user"></i> by <a href="#">
+                                    John Doe
+                                    </a><br /> 
+                                    <i class="icon-calendar"></i> 08/07/2009<br /> 
+                                    <i class="icon-comment"></i> <a href="/collection/comments/{{_id}}" class="comments_number" >48 commentaires</a><br /> 
+                                    <i class="icon-pencil"></i> <a  href="#" >N Contributeurs</a><br /> 
+                              </li>
+                              <li class="plan-feature">
+                                <i class="icon-star"></i> Note :  <span class="star_rating"></span><br />           
+                                <i class="icon-tags"></i> Tags :
+                                <a href="/col/projects_by_topic/{{this}}" class="toResTags" ><span class="label label-info">NoSql</span></a>      
+                              </li>
+                            </ul>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+          
+                  </div>
+
+                  <!--<div class="carousel-caption">
+                      <h4>{{name}}</h4>
+                      <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
+                  </div>-->
+                </div>
+                <div class="item" data-slide-number="1">
+                  
+                  <div class="span11" style="padding-top:15px;padding-bottom:15px;margin-left:15px">
+                    
+                    <div class="projectItem span4" style="opacity: 1;padding-left:20px;">  
+                      <div class="projectItem_container">
+                        <div class="project-thumbnail project-three-column">
+                          <div class="plan">
+                            <div class="plan-name-color" style="height:172px;">
+                                <span class="descriptionProjectItem">
+                                  <center>
+                                    Nom du projet<br /><br />
+                                    Description du projet, projet sympa avec des trucs à faire<br />
+                                    <a href="/view/project/{{_id}}">Read more</a>
+                                  </center>
+                                </span>  
+                            </div>
+                            <ul>
+                              <li class="plan-feature">
+                                <i class="icon-user"></i> by <a href="#">
+                                    John Doe
+                                    </a><br /> 
+                                    <i class="icon-calendar"></i> 08/07/2009<br /> 
+                                    <i class="icon-comment"></i> <a href="/collection/comments/{{_id}}" class="comments_number" >48 commentaires</a><br /> 
+                                    <i class="icon-pencil"></i> <a  href="#" >N Contributeurs</a><br /> 
+                              </li>
+                              <li class="plan-feature">
+                                <i class="icon-star"></i> Note :  <span class="star_rating"></span><br />           
+                                <i class="icon-tags"></i> Tags :
+                                <a href="/col/projects_by_topic/{{this}}" class="toResTags" ><span class="label label-info">NoSql</span></a>      
+                              </li>
+                            </ul>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  
+                    <div class="projectItem span4" style="opacity: 1;padding-left:20px;">  
+                      <div class="projectItem_container">
+                        <div class="project-thumbnail project-three-column">
+                          <div class="plan">
+                            <div class="plan-name-color" style="height:172px;">
+                                <span class="descriptionProjectItem">
+                                  <center>
+                                    Nom du projet<br /><br />
+                                    Description du projet, projet sympa avec des trucs à faire<br />
+                                    <a href="/view/project/{{_id}}">Read more</a>
+                                  </center>
+                                </span>  
+                            </div>
+                            <ul>
+                              <li class="plan-feature">
+                                <i class="icon-user"></i> by <a href="#">
+                                    John Doe
+                                    </a><br /> 
+                                    <i class="icon-calendar"></i> 08/07/2009<br /> 
+                                    <i class="icon-comment"></i> <a href="/collection/comments/{{_id}}" class="comments_number" >48 commentaires</a><br /> 
+                                    <i class="icon-pencil"></i> <a  href="#" >N Contributeurs</a><br /> 
+                              </li>
+                              <li class="plan-feature">
+                                <i class="icon-star"></i> Note :  <span class="star_rating"></span><br />           
+                                <i class="icon-tags"></i> Tags :
+                                <a href="/col/projects_by_topic/{{this}}" class="toResTags" ><span class="label label-info">NoSql</span></a>      
+                              </li>
+                            </ul>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    
+                    <div class="projectItem span4" style="opacity: 1;padding-left:20px;">  
+                      <div class="projectItem_container">
+                        <div class="project-thumbnail project-three-column">
+                          <div class="plan">
+                            <div class="plan-name-color" style="height:172px;">
+                                <span class="descriptionProjectItem">
+                                  <center>
+                                    Nom du projet<br /><br />
+                                    Description du projet, projet sympa avec des trucs à faire<br />
+                                    <a href="/view/project/{{_id}}">Read more</a>
+                                  </center>
+                                </span>  
+                            </div>
+                            <ul>
+                              <li class="plan-feature">
+                                <i class="icon-user"></i> by <a href="#">
+                                    John Doe
+                                    </a><br /> 
+                                    <i class="icon-calendar"></i> 08/07/2009<br /> 
+                                    <i class="icon-comment"></i> <a href="/collection/comments/{{_id}}" class="comments_number" >48 commentaires</a><br /> 
+                                    <i class="icon-pencil"></i> <a  href="#" >N Contributeurs</a><br /> 
+                              </li>
+                              <li class="plan-feature">
+                                <i class="icon-star"></i> Note :  <span class="star_rating"></span><br />           
+                                <i class="icon-tags"></i> Tags :
+                                <a href="/col/projects_by_topic/{{this}}" class="toResTags" ><span class="label label-info">NoSql</span></a>      
+                              </li>
+                            </ul>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+          
+                  </div>
+
+                  <!--<div class="carousel-caption">
+                      <h4>{{name}}</h4>
+                      <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
+                  </div>-->
+                  
+                </div>
+                <div class="item" data-slide-number="2">
+                  
+                  <div class="span11" style="padding-top:15px;padding-bottom:15px;margin-left:15px">
+                    
+                    <div class="projectItem span4" style="opacity: 1;padding-left:20px;">  
+                      <div class="projectItem_container">
+                        <div class="project-thumbnail project-three-column">
+                          <div class="plan">
+                            <div class="plan-name-color" style="height:172px;">
+                                <span class="descriptionProjectItem">
+                                  <center>
+                                    Nom du projet<br /><br />
+                                    Description du projet, projet sympa avec des trucs à faire<br />
+                                    <a href="/view/project/{{_id}}">Read more</a>
+                                  </center>
+                                </span>  
+                            </div>
+                            <ul>
+                              <li class="plan-feature">
+                                <i class="icon-user"></i> by <a href="#">
+                                    John Doe
+                                    </a><br /> 
+                                    <i class="icon-calendar"></i> 08/07/2009<br /> 
+                                    <i class="icon-comment"></i> <a href="/collection/comments/{{_id}}" class="comments_number" >48 commentaires</a><br /> 
+                                    <i class="icon-pencil"></i> <a  href="#" >N Contributeurs</a><br /> 
+                              </li>
+                              <li class="plan-feature">
+                                <i class="icon-star"></i> Note :  <span class="star_rating"></span><br />           
+                                <i class="icon-tags"></i> Tags :
+                                <a href="/col/projects_by_topic/{{this}}" class="toResTags" ><span class="label label-info">NoSql</span></a>      
+                              </li>
+                            </ul>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  
+                    <div class="projectItem span4" style="opacity: 1;padding-left:20px;">  
+                      <div class="projectItem_container">
+                        <div class="project-thumbnail project-three-column">
+                          <div class="plan">
+                            <div class="plan-name-color" style="height:172px;">
+                                <span class="descriptionProjectItem">
+                                  <center>
+                                    Nom du projet<br /><br />
+                                    Description du projet, projet sympa avec des trucs à faire<br />
+                                    <a href="/view/project/{{_id}}">Read more</a>
+                                  </center>
+                                </span>  
+                            </div>
+                            <ul>
+                              <li class="plan-feature">
+                                <i class="icon-user"></i> by <a href="#">
+                                    John Doe
+                                    </a><br /> 
+                                    <i class="icon-calendar"></i> 08/07/2009<br /> 
+                                    <i class="icon-comment"></i> <a href="/collection/comments/{{_id}}" class="comments_number" >48 commentaires</a><br /> 
+                                    <i class="icon-pencil"></i> <a  href="#" >N Contributeurs</a><br /> 
+                              </li>
+                              <li class="plan-feature">
+                                <i class="icon-star"></i> Note :  <span class="star_rating"></span><br />           
+                                <i class="icon-tags"></i> Tags :
+                                <a href="/col/projects_by_topic/{{this}}" class="toResTags" ><span class="label label-info">NoSql</span></a>      
+                              </li>
+                            </ul>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    
+                    <div class="projectItem span4" style="opacity: 1;padding-left:20px;">  
+                      <div class="projectItem_container">
+                        <div class="project-thumbnail project-three-column">
+                          <div class="plan">
+                            <div class="plan-name-color" style="height:172px;">
+                                <span class="descriptionProjectItem">
+                                  <center>
+                                    Nom du projet<br /><br />
+                                    Description du projet, projet sympa avec des trucs à faire<br />
+                                    <a href="/view/project/{{_id}}">Read more</a>
+                                  </center>
+                                </span>  
+                            </div>
+                            <ul>
+                              <li class="plan-feature">
+                                <i class="icon-user"></i> by <a href="#">
+                                    John Doe
+                                    </a><br /> 
+                                    <i class="icon-calendar"></i> 08/07/2009<br /> 
+                                    <i class="icon-comment"></i> <a href="/collection/comments/{{_id}}" class="comments_number" >48 commentaires</a><br /> 
+                                    <i class="icon-pencil"></i> <a  href="#" >N Contributeurs</a><br /> 
+                              </li>
+                              <li class="plan-feature">
+                                <i class="icon-star"></i> Note :  <span class="star_rating"></span><br />           
+                                <i class="icon-tags"></i> Tags :
+                                <a href="/col/projects_by_topic/{{this}}" class="toResTags" ><span class="label label-info">NoSql</span></a>      
+                              </li>
+                            </ul>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+          
+                  </div>
+
+                  <!--<div class="carousel-caption">
+                      <h4>{{name}}</h4>
+                      <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
+                  </div>-->
+                  
+                </div>
+                <div class="item" data-slide-number="3">
+                  
+                  <div class="span11" style="padding-top:15px;padding-bottom:15px;margin-left:15px;">
+                    
+                    <div class="projectItem span4" style="opacity: 1;padding-left:20px;">  
+                      <div class="projectItem_container">
+                        <div class="project-thumbnail project-three-column">
+                          <div class="plan">
+                            <div class="plan-name-color" style="height:172px;">
+                                <span class="descriptionProjectItem">
+                                  <center>
+                                    Nom du projet<br /><br />
+                                    Description du projet, projet sympa avec des trucs à faire<br />
+                                    <a href="/view/project/{{_id}}">Read more</a>
+                                  </center>
+                                </span>  
+                            </div>
+                            <ul>
+                              <li class="plan-feature">
+                                <i class="icon-user"></i> by <a href="#">
+                                    John Doe
+                                    </a><br /> 
+                                    <i class="icon-calendar"></i> 08/07/2009<br /> 
+                                    <i class="icon-comment"></i> <a href="/collection/comments/{{_id}}" class="comments_number" >48 commentaires</a><br /> 
+                                    <i class="icon-pencil"></i> <a  href="#" >N Contributeurs</a><br /> 
+                              </li>
+                              <li class="plan-feature">
+                                <i class="icon-star"></i> Note :  <span class="star_rating"></span><br />           
+                                <i class="icon-tags"></i> Tags :
+                                <a href="/col/projects_by_topic/{{this}}" class="toResTags" ><span class="label label-info">NoSql</span></a>      
+                              </li>
+                            </ul>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  
+                    <div class="projectItem span4" style="opacity: 1;padding-left:20px;">  
+                      <div class="projectItem_container">
+                        <div class="project-thumbnail project-three-column">
+                          <div class="plan">
+                            <div class="plan-name-color" style="height:172px;">
+                                <span class="descriptionProjectItem">
+                                  <center>
+                                    Nom du projet<br /><br />
+                                    Description du projet, projet sympa avec des trucs à faire<br />
+                                    <a href="/view/project/{{_id}}">Read more</a>
+                                  </center>
+                                </span>  
+                            </div>
+                            <ul>
+                              <li class="plan-feature">
+                                <i class="icon-user"></i> by <a href="#">
+                                    John Doe
+                                    </a><br /> 
+                                    <i class="icon-calendar"></i> 08/07/2009<br /> 
+                                    <i class="icon-comment"></i> <a href="/collection/comments/{{_id}}" class="comments_number" >48 commentaires</a><br /> 
+                                    <i class="icon-pencil"></i> <a  href="#" >N Contributeurs</a><br /> 
+                              </li>
+                              <li class="plan-feature">
+                                <i class="icon-star"></i> Note :  <span class="star_rating"></span><br />           
+                                <i class="icon-tags"></i> Tags :
+                                <a href="/col/projects_by_topic/{{this}}" class="toResTags" ><span class="label label-info">NoSql</span></a>      
+                              </li>
+                            </ul>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    
+                    <div class="projectItem span4" style="opacity: 1;padding-left:20px;">  
+                      <div class="projectItem_container">
+                        <div class="project-thumbnail project-three-column">
+                          <div class="plan">
+                            <div class="plan-name-color" style="height:172px;">
+                                <span class="descriptionProjectItem">
+                                  <center>
+                                    Nom du projet<br /><br />
+                                    Description du projet, projet sympa avec des trucs à faire<br />
+                                    <a href="/view/project/{{_id}}">Read more</a>
+                                  </center>
+                                </span>  
+                            </div>
+                            <ul>
+                              <li class="plan-feature">
+                                <i class="icon-user"></i> by <a href="#">
+                                    John Doe
+                                    </a><br /> 
+                                    <i class="icon-calendar"></i> 08/07/2009<br /> 
+                                    <i class="icon-comment"></i> <a href="/collection/comments/{{_id}}" class="comments_number" >48 commentaires</a><br /> 
+                                    <i class="icon-pencil"></i> <a  href="#" >N Contributeurs</a><br /> 
+                              </li>
+                              <li class="plan-feature">
+                                <i class="icon-star"></i> Note :  <span class="star_rating"></span><br />           
+                                <i class="icon-tags"></i> Tags :
+                                <a href="/col/projects_by_topic/{{this}}" class="toResTags" ><span class="label label-info">NoSql</span></a>      
+                              </li>
+                            </ul>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+          
+                  </div>
+                  
+                </div>
+                <div class="item" data-slide-number="4">
+                  
+                  <div class="span11" style="padding-top:15px;padding-bottom:15px;margin-left:15px;">
+                    
+                    <div class="projectItem span4" style="opacity: 1;padding-left:20px;">  
+                      <div class="projectItem_container">
+                        <div class="project-thumbnail project-three-column">
+                          <div class="plan">
+                            <div class="plan-name-color" style="height:172px;">
+                                <span class="descriptionProjectItem">
+                                  <center>
+                                    Nom du projet<br /><br />
+                                    Description du projet, projet sympa avec des trucs à faire<br />
+                                    <a href="/view/project/{{_id}}">Read more</a>
+                                  </center>
+                                </span>  
+                            </div>
+                            <ul>
+                              <li class="plan-feature">
+                                <i class="icon-user"></i> by <a href="#">
+                                    John Doe
+                                    </a><br /> 
+                                    <i class="icon-calendar"></i> 08/07/2009<br /> 
+                                    <i class="icon-comment"></i> <a href="/collection/comments/{{_id}}" class="comments_number" >48 commentaires</a><br /> 
+                                    <i class="icon-pencil"></i> <a  href="#" >N Contributeurs</a><br /> 
+                              </li>
+                              <li class="plan-feature">
+                                <i class="icon-star"></i> Note :  <span class="star_rating"></span><br />           
+                                <i class="icon-tags"></i> Tags :
+                                <a href="/col/projects_by_topic/{{this}}" class="toResTags" ><span class="label label-info">NoSql</span></a>      
+                              </li>
+                            </ul>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  
+                    <div class="projectItem span4" style="opacity: 1;padding-left:20px;">  
+                      <div class="projectItem_container">
+                        <div class="project-thumbnail project-three-column">
+                          <div class="plan">
+                            <div class="plan-name-color" style="height:172px;">
+                                <span class="descriptionProjectItem">
+                                  <center>
+                                    Nom du projet<br /><br />
+                                    Description du projet, projet sympa avec des trucs à faire<br />
+                                    <a href="/view/project/{{_id}}">Read more</a>
+                                  </center>
+                                </span>  
+                            </div>
+                            <ul>
+                              <li class="plan-feature">
+                                <i class="icon-user"></i> by <a href="#">
+                                    John Doe
+                                    </a><br /> 
+                                    <i class="icon-calendar"></i> 08/07/2009<br /> 
+                                    <i class="icon-comment"></i> <a href="/collection/comments/{{_id}}" class="comments_number" >48 commentaires</a><br /> 
+                                    <i class="icon-pencil"></i> <a  href="#" >N Contributeurs</a><br /> 
+                              </li>
+                              <li class="plan-feature">
+                                <i class="icon-star"></i> Note :  <span class="star_rating"></span><br />           
+                                <i class="icon-tags"></i> Tags :
+                                <a href="/col/projects_by_topic/{{this}}" class="toResTags" ><span class="label label-info">NoSql</span></a>      
+                              </li>
+                            </ul>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    
+                    <div class="projectItem span4" style="opacity: 1;padding-left:20px;">  
+                      <div class="projectItem_container">
+                        <div class="project-thumbnail project-three-column">
+                          <div class="plan">
+                            <div class="plan-name-color" style="height:172px;">
+                                <span class="descriptionProjectItem">
+                                  <center>
+                                    Nom du projet<br /><br />
+                                    Description du projet, projet sympa avec des trucs à faire<br />
+                                    <a href="/view/project/{{_id}}">Read more</a>
+                                  </center>
+                                </span>  
+                            </div>
+                            <ul>
+                              <li class="plan-feature">
+                                <i class="icon-user"></i> by <a href="#">
+                                    John Doe
+                                    </a><br /> 
+                                    <i class="icon-calendar"></i> 08/07/2009<br /> 
+                                    <i class="icon-comment"></i> <a href="/collection/comments/{{_id}}" class="comments_number" >48 commentaires</a><br /> 
+                                    <i class="icon-pencil"></i> <a  href="#" >N Contributeurs</a><br /> 
+                              </li>
+                              <li class="plan-feature">
+                                <i class="icon-star"></i> Note :  <span class="star_rating"></span><br />           
+                                <i class="icon-tags"></i> Tags :
+                                <a href="/col/projects_by_topic/{{this}}" class="toResTags" ><span class="label label-info">NoSql</span></a>      
+                              </li>
+                            </ul>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+          
+                  </div>
+                  
+                </div>
+                <div class="item" data-slide-number="5">
+                  
+                  <div class="span11" style="padding-top:15px;padding-bottom:15px;margin-left:15px;">
+                    
+                    <div class="projectItem span4" style="opacity: 1;padding-left:20px;">  
+                      <div class="projectItem_container">
+                        <div class="project-thumbnail project-three-column">
+                          <div class="plan">
+                            <div class="plan-name-color" style="height:172px;">
+                                <span class="descriptionProjectItem">
+                                  <center>
+                                    Nom du projet<br /><br />
+                                    Description du projet, projet sympa avec des trucs à faire<br />
+                                    <a href="/view/project/{{_id}}">Read more</a>
+                                  </center>
+                                </span>  
+                            </div>
+                            <ul>
+                              <li class="plan-feature">
+                                <i class="icon-user"></i> by <a href="#">
+                                    John Doe
+                                    </a><br /> 
+                                    <i class="icon-calendar"></i> 08/07/2009<br /> 
+                                    <i class="icon-comment"></i> <a href="/collection/comments/{{_id}}" class="comments_number" >48 commentaires</a><br /> 
+                                    <i class="icon-pencil"></i> <a  href="#" >N Contributeurs</a><br /> 
+                              </li>
+                              <li class="plan-feature">
+                                <i class="icon-star"></i> Note :  <span class="star_rating"></span><br />           
+                                <i class="icon-tags"></i> Tags :
+                                <a href="/col/projects_by_topic/{{this}}" class="toResTags" ><span class="label label-info">NoSql</span></a>      
+                              </li>
+                            </ul>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  
+                    <div class="projectItem span4" style="opacity: 1;padding-left:20px;">  
+                      <div class="projectItem_container">
+                        <div class="project-thumbnail project-three-column">
+                          <div class="plan">
+                            <div class="plan-name-color" style="height:172px;">
+                                <span class="descriptionProjectItem">
+                                  <center>
+                                    Nom du projet<br /><br />
+                                    Description du projet, projet sympa avec des trucs à faire<br />
+                                    <a href="/view/project/{{_id}}">Read more</a>
+                                  </center>
+                                </span>  
+                            </div>
+                            <ul>
+                              <li class="plan-feature">
+                                <i class="icon-user"></i> by <a href="#">
+                                    John Doe
+                                    </a><br /> 
+                                    <i class="icon-calendar"></i> 08/07/2009<br /> 
+                                    <i class="icon-comment"></i> <a href="/collection/comments/{{_id}}" class="comments_number" >48 commentaires</a><br /> 
+                                    <i class="icon-pencil"></i> <a  href="#" >N Contributeurs</a><br /> 
+                              </li>
+                              <li class="plan-feature">
+                                <i class="icon-star"></i> Note :  <span class="star_rating"></span><br />           
+                                <i class="icon-tags"></i> Tags :
+                                <a href="/col/projects_by_topic/{{this}}" class="toResTags" ><span class="label label-info">NoSql</span></a>      
+                              </li>
+                            </ul>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    
+                    <div class="projectItem span4" style="opacity: 1;padding-left:20px;">  
+                      <div class="projectItem_container">
+                        <div class="project-thumbnail project-three-column">
+                          <div class="plan">
+                            <div class="plan-name-color" style="height:172px;">
+                                <span class="descriptionProjectItem">
+                                  <center>
+                                    Nom du projet<br /><br />
+                                    Description du projet, projet sympa avec des trucs à faire<br />
+                                    <a href="/view/project/{{_id}}">Read more</a>
+                                  </center>
+                                </span>  
+                            </div>
+                            <ul>
+                              <li class="plan-feature">
+                                <i class="icon-user"></i> by <a href="#">
+                                    John Doe
+                                    </a><br /> 
+                                    <i class="icon-calendar"></i> 08/07/2009<br /> 
+                                    <i class="icon-comment"></i> <a href="/collection/comments/{{_id}}" class="comments_number" >48 commentaires</a><br /> 
+                                    <i class="icon-pencil"></i> <a  href="#" >N Contributeurs</a><br /> 
+                              </li>
+                              <li class="plan-feature">
+                                <i class="icon-star"></i> Note :  <span class="star_rating"></span><br />           
+                                <i class="icon-tags"></i> Tags :
+                                <a href="/col/projects_by_topic/{{this}}" class="toResTags" ><span class="label label-info">NoSql</span></a>      
+                              </li>
+                            </ul>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+          
+                  </div>
+                  
+                </div>
               </div>
               <!-- Carousel nav -->
               <a class="carousel-control left" href="#myCarousel" data-slide="prev">‹</a>
               <a class="carousel-control right" href="#myCarousel" data-slide="next">›</a>
-            </div>
-            <div class="hidden-phone" id="slider-thumbs">
-              <!-- Bottom switcher of slider -->
-              <ul class="thumbnails">
-                <li class="span2">
-                  <a class="thumbnail" id="carousel-selector-0">
-                    <img src="http://placehold.it/170x100&text=one" />
-                  </a>
-                </li>
-                <li class="span2">
-                  <a class="thumbnail" id="carousel-selector-1">
-                    <img src="http://placehold.it/170x100&text=two" />
-                  </a>
-                </li>
-                <li class="span2">
-                  <a class="thumbnail" id="carousel-selector-2">
-                    <img src="http://placehold.it/170x100&text=three" />
-                  </a>
-                </li>
-                <li class="span2">
-                  <a class="thumbnail" id="carousel-selector-3">
-                    <img src="http://placehold.it/170x100&text=four" />
-                  </a>
-                </li>
-                <li class="span2">
-                  <a class="thumbnail" id="carousel-selector-4">
-                    <img src="http://placehold.it/170x100&text=five" />
-                  </a>
-                </li>
-                <li class="span2">
-                  <a class="thumbnail" id="carousel-selector-5">
-                    <img src="http://placehold.it/170x100&text=six" />
-                  </a>
-                </li>
-              </ul>
-            </div>
-          </div>
-          <div class="span4" id="carousel-text"></div> 
-          <div style="display: none;" id="slide-content">
-            <div id="slide-content-0">
-              <h2>Slider One</h2>
-              <p>Lorem ipsum dolor sit amet,   dolor in reprehenderit in voluptate velit esse cilludolor in tate velit esse cilludolor in reprehenderitehenderit in voluptate velit esse cilludolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum </p>
-              <p class="sub-text">October 24 2012 - <a href="#">Read more</a></p>
-            </div>
-            <div id="slide-content-1">
-              <h2>Slider Two</h2>
-              <p>Lorem Ipsum Dolor</p>
-              <p class="sub-text">October 24 2012 - <a href="#">Read more</a></p>
-            </div>
-            <div id="slide-content-2">
-              <h2>Slider Three</h2>
-              <p>Lorem Ipsum Dolor</p>
-              <p class="sub-text">October 24 2012 - <a href="#">Read more</a></p>
-            </div>
-            <div id="slide-content-3">
-              <h2>Slider Four</h2>
-              <p>Lorem Ipsum Dolor</p>
-              <p class="sub-text">October 24 2012 - <a href="#">Read more</a></p>
-            </div>
-            <div id="slide-content-4">
-              <h2>Slider Five</h2>
-              <p>Lorem Ipsum Dolor</p>
-              <p class="sub-text">October 24 2012 - <a href="#">Read more</a></p>
-            </div>
-            <div id="slide-content-5">
-              <h2>Slider Six</h2>
-              <p>Lorem Ipsum Dolor</p>
-              <p class="sub-text">October 24 2012 - <a href="#">Read more</a></p>
             </div>
           </div>
         </div>
