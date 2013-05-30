@@ -2,6 +2,10 @@ template = require 'views/templates/userProfile'
 View = require 'views/base/view'
 mediator = require 'mediator'
 
+SimpleObjectModel = require 'models/simpleObject_model'
+SimpleObjectCollection = require 'models/simpleObject_collection'
+
+
 module.exports = class UserProfileView extends View
   autoRender: true
   className: 'UserProfileView well well-small'
@@ -10,7 +14,7 @@ module.exports = class UserProfileView extends View
   
   initialize: ->
     super
-    
+    @listenTo @model, "change", @render
     #event handler
     @delegate "click", ".user_attr", @toogleProjectAttr
     @delegate "blur", ".user_attr_input", @toogleProjectAttr

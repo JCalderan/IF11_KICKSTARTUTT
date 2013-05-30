@@ -14,13 +14,13 @@ UsersColView = require 'views/usersCol_view'
 
 ProjectView = require 'views/project_view'
 
+UserView = require 'views/userProfile_view'
+
 SignUpView = require 'views/signUp_view'
 
 AdvanceSearchView = require 'views/advanceSearch_view'
 
 ProjectLauncher = require 'views/projectLauncher_view'
-
-UserProfile = require 'views/userProfile_view'
 
 module.exports = class HomeController extends Controller
 
@@ -48,11 +48,13 @@ module.exports = class HomeController extends Controller
       when "users" then usersCol_view = new UsersColView(collection: collection, container: "#splitPage_left")
     collection.fetch()
       
-  get_project: (params)->
+  get_typeView: (params)->
     @view = new SplitPageView(container: '#page_container')
-    project_model = new SimpleObjectModel(_id: if params.id then params.id else null)
-    project_view = new ProjectView(model: project_model, container: "#splitPage_left")
-    project_model.fetch()
+    type_model = new SimpleObjectModel(_id: if params.id then params.id else null)
+    switch params.type
+      when "project" then project_view = new ProjectView(model: type_model, container: "#splitPage_left")
+      when "user" then user_view = new UserView(model: type_model, container: "#splitPage_left")
+    type_model.fetch()
     
   signup: (params)->
     @view = new SignUpView(container: '#page_container')
@@ -79,7 +81,3 @@ module.exports = class HomeController extends Controller
     @view = new SplitPageView(container: '#page_container')
     project = new SimpleObjectModel(_id: if params.id then params.id else null)
     projectLauncher_view = new ProjectLauncher(model: project, container: '#splitPage_left')
-
-  userProfile: (params)->
-    @view = new SplitPageView(container: '#page_container')
-    userProfil_view = new UserProfile(container: "#splitPage_left")

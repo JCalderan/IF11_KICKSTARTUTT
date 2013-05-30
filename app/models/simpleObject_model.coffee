@@ -75,6 +75,7 @@ module.exports = class CommentModel extends Model
         opts.success = (opts.succeed || (
             (model, response, options)=>
                 @set("_id":response.id)
+                
                 console.log(response)
         ))
         super(attr, opts)
