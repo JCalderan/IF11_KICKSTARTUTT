@@ -10,6 +10,8 @@ ModInfoView = require 'views/modInfo_view'
 
 ProjectsColView = require 'views/projectsCol_view'
 
+UsersColView = require 'views/usersCol_view'
+
 ProjectView = require 'views/project_view'
 
 SignUpView = require 'views/signUp_view'
@@ -38,12 +40,14 @@ module.exports = class HomeController extends Controller
     #projectIdeas_view = new ModInfoView(model: projectIdeas_model, container: @view.inner_container)
     
     
-  list_projects: (params)->
+  list_collection: (params)->
     @view = new SplitPageView(container: '#page_container')
-    projects_collection = new SimpleObject_collection(couchView:(if params.collection then params.collection else ""), couchKey:(if params.filter then params.filter else ""))
-    projectsCol_view = new ProjectsColView(collection: projects_collection, container: "#splitPage_left")
-    projects_collection.fetch() 
-  
+    collection = new SimpleObject_collection(couchView:(if params.collection then params.collection else ""), couchKey:(if params.filter then params.filter else ""))
+    switch params.collection
+      when "projects" then projectsCol_view = new ProjectsColView(collection: collection, container: "#splitPage_left")
+      when "users" then usersCol_view = new UsersColView(collection: collection, container: "#splitPage_left")
+    collection.fetch()
+      
   get_project: (params)->
     @view = new SplitPageView(container: '#page_container')
     project_model = new SimpleObjectModel(_id: if params.id then params.id else null)
