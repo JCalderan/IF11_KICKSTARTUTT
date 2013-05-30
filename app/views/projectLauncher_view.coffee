@@ -55,6 +55,15 @@ module.exports = class ProjectItemView extends View
     $(@el).find("#tp_toolTip").tooltip("title":"définir une nouvelle deadline")
     $(@el).find(".project_attr").css("cursor": "pointer")
     $(@el).find("#pill_#{@state}").addClass("active")
+    $(@el).find("#tab_home").addClass("active")
+    switch @state
+        when "creation"
+            $(@el).find("#tab_members a").removeAttr("data-toggle").attr("href":"#").css("cursor": "auto").addClass("muted")
+            $(@el).find("#tab_comments a").removeAttr("data-toggle").attr("href":"#").css("cursor": "auto").addClass("muted")
+        when "incubation"
+            $(@el).find("#tab_comments a").removeAttr("data-toggle").attr("href":"#").css("cursor": "auto").addClass("muted")
+        else
+            return 0
  
   toogleProjectAttr: (event)=>
     event.preventDefault()
@@ -129,14 +138,16 @@ module.exports = class ProjectItemView extends View
                 error_container.append(error_title)
                 @errors = true
             else
-                info_title = $("<p>", "class": "text-info", "text": " titre : "+$('#project_title_input').val())
+                info_title = $("<p>", "class": "text-info", "text": " "+$('#project_title_input').val()).prepend($("<i>", "class": "icon-pencil"))
                 @attrToSave["nom_projet"] = $('#project_title_input').val()
-                info_container.append(info_title)                
+                info_container.append(info_title)
+                
             if $("#project_description_input").val() == ""
                 warning_description = $("<p>", "class": "text-warning", "text": " Aucune description pour votre projet, vous pourrez l'éditer par la suite.").prepend($("<i>", "class": "icon-warning-sign"))
                 warning_container.append(warning_description)
             else
-                info_description = $("<p>", "class": "text-info", "text": " description : "+$('#project_description_input').val())
+                resume_description = " "+ $('#project_description_input').val().substr(0,15) + if $('#project_description_input').val().length > 15 then "..." else ""
+                info_description = $("<p>", "class": "text-info", "text": resume_description).prepend($("<i>", "class": "icon-comment"))
                 info_container.append(info_description)
                 @attrToSave["description_projet"] = $("#project_description_input").val()
                 
@@ -145,7 +156,7 @@ module.exports = class ProjectItemView extends View
                 warning_container.append(warning_deadline)
             else
                 deltaTime = Math.round((@deadline - @now) / 1000 / 60 / 60 / 24)
-                info_deadline = $("<p>", "class": "text-info", "text": " #{deltaTime} jour"+(if deltaTime > 1 then "s" else "")+" restant")
+                info_deadline = $("<p>", "class": "text-info", "text": " #{deltaTime} jour"+(if deltaTime > 1 then "s" else "")+" restant").prepend($("<i>", "class": "icon-calendar"))
                 info_container.append(info_deadline)
                 @attrToSave["deadline_projet"] = @deadline.valueOf()
             if !@imageReader.result
