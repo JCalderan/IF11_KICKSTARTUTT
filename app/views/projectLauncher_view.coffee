@@ -201,7 +201,7 @@ module.exports = class ProjectItemView extends View
     console.log("reload, @model.id = #{@model.id}")
     console.log(@model)
     if @model && @model.id
-        window.location.replace("/view/project/editor/#{@model.id}")
+        window.location.replace("/view/project/edit/#{@model.id}")
     else
         console.log("error : can't reload, check model or model.id property")
         console.log(@model.id)
