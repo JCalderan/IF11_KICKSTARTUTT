@@ -18,6 +18,8 @@ UserView = require 'views/userProfile_view'
 
 SignUpView = require 'views/signUp_view'
 
+FaqView = require 'views/faq_view'
+
 AdvanceSearchView = require 'views/advanceSearch_view'
 
 ProjectLauncher = require 'views/projectLauncher_view'
@@ -67,6 +69,10 @@ module.exports = class HomeController extends Controller
         #        console.log(data);
         #    }
         #});
+  
+  faq: (params)->
+    @view = new SplitPageView(container: '#page_container')
+    faq_View = new FaqView(container: "#splitPage_left")
     
   advanceSearch: (params)->
     @view = new SplitPageView(container: '#page_container')

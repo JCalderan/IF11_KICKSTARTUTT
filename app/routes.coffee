@@ -5,5 +5,6 @@ module.exports = (match) ->
   match 'view/:type/:id', 'home#get_typeView'
   match 'view/signup', 'home#signup'
   match 'view/projectLauncher', 'home#launch_project'
+  match 'view/faq', 'home#faq'
   match 'view/advanceSearch', 'home#advanceSearch'
   match 'view/project/edit/:id', 'home#edit_project'
