@@ -191,7 +191,7 @@ module.exports = class ProjectItemView extends View
                 @attrToSave["name"] = $('#project_title_input').val()
                 @attrToSave["description"] = $("#project_description_input").val()
                 @attrToSave["deadline"] = @deadline.valueOf()
-                @attrToSave["thumbnails"].push(@imageReader.result)
+                if @imageReader.result then @attrToSave["thumbnails"].push(@imageReader.result)
             else
                 console.log("error ! can't validate data")
         #on sauvegarde
