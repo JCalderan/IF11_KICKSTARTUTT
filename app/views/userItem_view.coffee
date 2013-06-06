@@ -8,7 +8,7 @@ module.exports = class UserItemView extends View
   autoRender: true
   tagName: 'li'
   template: template
-  className: "projectItem span2"
+  className: "userItem"
   container: null
   
   #custom attributes
