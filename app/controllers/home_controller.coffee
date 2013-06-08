@@ -27,20 +27,10 @@ ProjectLauncher = require 'views/projectLauncher_view'
 module.exports = class HomeController extends Controller
 
   index: ->
-    #@view = new HomePageView(container: '#page_container')
     @view = new SplitPageView(container: '#page_container')
-    staredProjects_model = new ModInfoModel(title:"Hot Projects", theme_color: "#CC4400")
-    staredProjects_view = new ModInfoView(model: staredProjects_model, container: "#splitPage_left")
-    
-    #lastProjects_model = new ModInfoModel(title: "Last Projects", theme_color: "#CC4400")
-    #lastProjects_view = new ModInfoView(model: lastProjects_model, container: @view.inner_container)
-    #
-    #skillAdd_model = new ModInfoModel(title: "Need Skills ?", theme_color: "#CC4400")
-    #skillAdd_view = new ModInfoView(model: skillAdd_model, container: @view.inner_container)
-    #
-    #projectIdeas_model = new ModInfoModel(title: "Ideas ???", theme_color: "#CC4400")
-    #projectIdeas_view = new ModInfoView(model: projectIdeas_model, container: @view.inner_container)
-    
+    listProjects_model = new SimpleObject_collection(couchView: "projects", couchQueryParams: limit:3)
+    staredProjects_view = new ModInfoView(container: "#splitPage_left", projectCol: listProjects_model)   
+    listProjects_model.fetch()
     
   list_collection: (params)->
     @view = new SplitPageView(container: '#page_container')

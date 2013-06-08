@@ -3,16 +3,22 @@ simpleObjectmModel = require 'models/simpleObject_model'
 
 module.exports = class ProjectsCol extends Collection
   model: simpleObjectmModel
+  couchView: null
+  couchKey: null
+  couchQueryParams: null
   
   initialize: (options)->
     options || (options = {})
     super(options)
-    if options.couchView
+    @couchView = (options.couchView || null)
+    @couchKey = (options.couchKey || null)
+    @couchQueryParams = (options.couchQueryParams || null)
+    if @couchView 
         @url = ()->
-            tmp_url = "/collection/"+options.couchView+"/"+(if options.couchKey then options.couchKey else "")
-            if options.couchQueryParams
+            tmp_url = "/collection/"+@couchView+"/"+(if @couchKey then @couchKey else "")
+            if @couchQueryParams
                 tmp_url+="?"
-                tmp_url += for paramKey, paramValue of options.couchQueryParams
+                tmp_url += for paramKey, paramValue of @couchQueryParams
                     "#{paramKey}=#{paramValue}&"
             url = tmp_url
             
