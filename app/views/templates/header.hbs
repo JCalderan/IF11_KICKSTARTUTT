@@ -9,38 +9,29 @@
     <div class="nav-collapse collapse">
       <ul class="nav">
         <li><a href="/"><i class="icon-home icon-white"></i> Home</a></li>
-        <!--<li ><a href="/col/projects/top"><i class="icon-star icon-white"></i> Top Projects</a></li>-->
         <li><a href="/col/projects"><i class="icon-list icon-white"></i> All Projects</a></li>
         <li><a href="/view/projectLauncher"><i class="icon-pencil icon-white"></i> Launch your Project</a></li>
         <li><a href="/col/users"><i class="icon-user icon-white"></i><i class="icon-user icon-white"></i> Users</a></li>
         <li><a href="/view/userProfile"><i class="icon-user icon-white"></i> Profil</a></li>
         <li><a href="/view/advanceSearch"><i class="icon-search icon-white"></i> Recherche avancée</a></li>
       </ul>
-     <!-- <form class="navbar-form form-search" id="formSearchProjects">
-      <input id="inputSearchProjects" type="text" class="search-query typeahead input-medium" placeholder="Search projects" autocomplete="off"/>
-      <input type="submit" value="search" style="display: none;" />
-          <div class="input-append search" >
-          <input type="text" style="height: 100%;" class="span2 typeahead"/>
-          <div class="btn-group" style="height: 100%;">
-            <button tabindex="-1" class="btn">Search</button>
-            <button tabindex="-1" data-toggle="dropdown" class="btn dropdown-toggle">
-              <span class="caret"></span>
-            </button>
-            <ul class="dropdown-menu">
-              <li><a href="#">Action</a></li>
-              <li><a href="#">Another action</a></li>
-              <li><a href="#">Something else here</a></li>
-              <li class="divider"></li>
-              <li><a href="#">Separated link</a></li>
-            </ul>
-          </div>
-        </div>
-      </form>  -->
       <ul class="nav pull-right">
+        <!--si logIn-->
+        {{#if name}}
+        <li class="dropdown">
+          <a data-toggle="dropdown" href="#" class="dropdown-toggle">Bonjour {{name}}<strong class="caret"></strong></a>
+          <div class="dropdown-menu"  style="padding: 15px; padding-bottom: 0px;">
+           <form accept-charset="UTF-8" action="logout" method="post" id="logout-form">
+              <input type="submit" value="Sign out" id="sign-out" class="btn btn-primary btn-block">
+            </form>
+          </div>
+        </li>
+        {{else}}
+        <!-- si logOut -->
         <li class="dropdown">
           <a data-toggle="dropdown" href="#" class="dropdown-toggle">Sign In <strong class="caret"></strong></a>
           <div class="dropdown-menu"  style="padding: 15px; padding-bottom: 0px;">
-           <form accept-charset="UTF-8" action="login" method="post">
+           <form accept-charset="UTF-8" action="login" method="post" id="login-form">
               <input type="text" name="username" id="username" placeholder="Username" style="margin-bottom: 15px;" />
               <input type="password" name="password" id="password" placeholder="Password" style="margin-bottom: 15px;" />
               <input type="checkbox" value="1" id="remember-me" name="remember-me" style="float: left; margin-right: 10px;" />
@@ -51,6 +42,7 @@
             </form>
           </div>
         </li>
+        {{/if}}
       </ul>
     </div>
   </div>
