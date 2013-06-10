@@ -1,6 +1,7 @@
 template = require 'views/templates/projectLauncher'
 View = require 'views/base/view'
-#simpleObjectCollection = require 'models/simpleObject_collection'
+SimpleObjectCollection = require 'models/simpleObject_collection'
+MembersColView = require 'views/membersCol_view'
 
 mediator = require "mediator"
 
@@ -12,7 +13,7 @@ module.exports = class ProjectItemView extends View
   container: null
   
   listen:
-    'change:_id model': 'reload'
+   'change:_id model': 'reload'
   
   #custom attributes
   projectState: 0
@@ -23,6 +24,7 @@ module.exports = class ProjectItemView extends View
   deadline: null
   imageReader : null
   attrToSave: null
+  membersCol: null
   
   initialize: ->
     super
@@ -36,6 +38,7 @@ module.exports = class ProjectItemView extends View
         imgElem.attr("src", e.target.result)
     #console.log @imageReader.result
     @attrToSave = {"type":"project", "thumbnails": []}
+    @membersCol = new SimpleObjectCollection(couchView: "users")
     
     #event handler
     @delegate "click", ".project_attr", @toogleProjectAttr
@@ -46,7 +49,7 @@ module.exports = class ProjectItemView extends View
     @delegate "changeDate", "#datePicker", @setDeadline
     @delegate "show", "#validateInfo", @loadValidateInfoContent
     @delegate "click", "#save_change_button", @validate
-    #@listenTo @model, "change", @reload
+    @listenTo @model, "change", @render
   
   render: =>
     super
@@ -73,6 +76,9 @@ module.exports = class ProjectItemView extends View
             $(@el).find("#tab_comments a").removeAttr("data-toggle").attr("href":"#").css("cursor": "default").addClass("muted")
         else
             return 0
+        
+    @membersColView = new MembersColView(collection: @membersCol, container: "#members_list")
+    @subview 'membersCol', @membersColView
  
   toogleProjectAttr: (event)=>
     event.preventDefault()
@@ -201,7 +207,7 @@ module.exports = class ProjectItemView extends View
     console.log("reload, @model.id = #{@model.id}")
     console.log(@model)
     if @model && @model.id
-        window.location.replace("/view/project/edit/#{@model.id}")
+        if @state_list.indexOf(@state) == 0 then window.location.replace("/view/project/edit/#{@model.id}") else @render()
     else
         console.log("error : can't reload, check model or model.id property")
         console.log(@model.id)
