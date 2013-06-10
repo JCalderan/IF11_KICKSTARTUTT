@@ -35,13 +35,17 @@ module.exports = class HomeController extends Controller
   list_collection: (params)->
     @view = new SplitPageView(container: '#page_container')
     collection = new SimpleObject_collection(couchView:(if params.collection then params.collection else ""), couchKey:(if params.filter then params.filter else ""))
-    col_view = new ProjectsColView(collection: collection, container: "#splitPage_left")
+    switch params.collection
+      when "projects" then col_view = new ProjectsColView(collection: collection, container: "#splitPage_left")
+      when "users" then col_view = new UsersColView(collection: collection, container: "#splitPage_left")
     collection.fetch()
       
   get_typeView: (params)->
     @view = new SplitPageView(container: '#page_container')
     model = new SimpleObjectModel(_id: if params.id then params.id else null)
-    model_view = new ProjectView(model: model, container: "#splitPage_left")
+    switch params.viewname
+      when "project" then model_view = new ProjectView(model: model, container: "#splitPage_left")
+      when "user" then user_view = new UserView(model: model, container: "#splitPage_left")
     model.fetch()
     
   signup: (params)->
@@ -73,3 +77,4 @@ module.exports = class HomeController extends Controller
     @view = new SplitPageView(container: '#page_container')
     project = new SimpleObjectModel(_id: if params.id then params.id else null)
     projectLauncher_view = new ProjectLauncher(model: project, container: '#splitPage_left')
+    project.fetch()
