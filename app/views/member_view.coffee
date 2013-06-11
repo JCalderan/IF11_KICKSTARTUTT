@@ -6,7 +6,8 @@ module.exports = class MemberView extends View
   #class attributes
   autoRender: true
   template: template
-  className: "member row-fluid"
+  tagName:'li'
+  className: "memberToAdd"
   container: null
   #custom attributes
   

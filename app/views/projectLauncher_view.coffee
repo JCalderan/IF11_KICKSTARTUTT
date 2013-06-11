@@ -39,8 +39,8 @@ module.exports = class ProjectItemView extends View
     #console.log @imageReader.result
     @attrToSave = {"type":"project", "thumbnails": []}
     @membersCol = new SimpleObjectCollection(couchView: "users")
-    
     #event handler
+    @delegate "click", "#members_pill_link", @initLoadMembers
     @delegate "click", ".project_attr", @toogleProjectAttr
     @delegate "blur", ".project_attr_input", @toogleProjectAttr
     @delegate "click", "#project_thumbnail", @setProjectThumbnail
@@ -49,6 +49,7 @@ module.exports = class ProjectItemView extends View
     @delegate "changeDate", "#datePicker", @setDeadline
     @delegate "show", "#validateInfo", @loadValidateInfoContent
     @delegate "click", "#save_change_button", @validate
+    @delegate "click", ".memberToAdd" , @addMember
     @listenTo @model, "change", @render
   
   render: =>
@@ -56,7 +57,6 @@ module.exports = class ProjectItemView extends View
     #on definit le nouvel etat de la vue : devrait être fait cote model,
     #mais on en à besoin ici pour la persistance de l'affichage (notemment lorsqu'il faut incremente l'etat par rapport au precedant)
     @state = @state_list[( if @model.get("state") then @model.get("state") else 0 )]
-    
     $(@el).find("#tp_toolTip").tooltip("title":"définir une nouvelle deadline")
     $(@el).find(".project_attr").css("cursor": "pointer")
     $(@el).find("#pill_#{@state}").addClass("active")
@@ -79,6 +79,10 @@ module.exports = class ProjectItemView extends View
         
     @membersColView = new MembersColView(collection: @membersCol, container: "#members_list")
     @subview 'membersCol', @membersColView
+ 
+  initLoadMembers: (event)->
+    @membersCol.fetch()
+    @membersColView.render() 
  
   toogleProjectAttr: (event)=>
     event.preventDefault()
@@ -198,16 +202,25 @@ module.exports = class ProjectItemView extends View
                 @attrToSave["description"] = $("#project_description_input").val()
                 @attrToSave["deadline"] = @deadline.valueOf()
                 if @imageReader.result then @attrToSave["thumbnails"].push(@imageReader.result)
+            when "incubation"
+                #@attrToSave["members"]
             else
                 console.log("error ! can't validate data")
         #on sauvegarde
         @model.save(@attrToSave)
+        
+  addMember: (event)->
+    elem = $(event.target).parent()
+    elem.blur()
+    elem.removeClass('memberToAdd')
+    elem.addClass('elemToRemove')
+    $("#membersProject").append(elem); 
     
   reload: =>
     console.log("reload, @model.id = #{@model.id}")
     console.log(@model)
     if @model && @model.id
-        if @state_list.indexOf(@state) == 0 then window.location.replace("/view/project/edit/#{@model.id}") else @render()
+        window.location.replace("/view/project/edit/#{@model.id}")
     else
         console.log("error : can't reload, check model or model.id property")
         console.log(@model.id)

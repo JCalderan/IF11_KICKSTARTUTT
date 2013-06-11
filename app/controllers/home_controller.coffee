@@ -76,5 +76,6 @@ module.exports = class HomeController extends Controller
   edit_project: (params)->
     @view = new SplitPageView(container: '#page_container')
     project = new SimpleObjectModel(_id: if params.id then params.id else null)
+    console.log(project)
     projectLauncher_view = new ProjectLauncher(model: project, container: '#splitPage_left')
     project.fetch()
