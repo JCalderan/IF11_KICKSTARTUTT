@@ -1,3 +1,13 @@
+  <style>
+	h3[class="popover-title"] {
+		color:grey;
+	}
+	
+	li span {
+		float: right;
+	}
+  </style>
+
 <div class="sidebar-nav" style="margin-left:10px;">
   <div class="well well-small">
     <div class="row">
@@ -5,13 +15,12 @@
       <div class="span2">
         admin<br/>
         <strong>First Last Name</strong><br />
-        <span class=" badge badge-warning">8 messages</span> <span class=" badge badge-info">15 followers</span><br /><br />
+        <span class=" badge badge-warning"><a id="popoDemandes" style="color: white;" data-placement="right" data-toggle="popover" href="#" data-original-title="Mes demandes" data-trigger='focus'>3 demandes</a></span> 
+		<span class=" badge badge-info"><a id="popoInvit" style="color: white;" data-placement="right" data-toggle="popover" href="#" data-original-title="Mes invitations" data-trigger='focus'>4 invitations</span><br /><br />
       </div>
       <br />
-      <div class="span3">
-        <a href="#" class="btn"><i class="icon-pencil"></i> <strong>Write</strong></a>
-        <a href="#" class="btn"><i class="icon-edit"></i> <strong>Edit</strong></a>
-        <a href="#" class="btn"><i class="icon-trash"></i> <strong>Delete</strong></a>
+      <div class="span4">
+        <a href="#" class="btn"><i class="icon-pencil"></i> <strong>New project</strong></a>
       </div>   
     </div>
   </div>
@@ -21,20 +30,38 @@
   <div class="well well-small">
     <ul class="nav nav-list">
       <li class="nav-header">Main</li>
-      <li class="active"><a href="index"><i class="icon-home"></i> Dashboard</a></li>
-      <li><a href="#"><i class="icon-edit"></i> Add Blog Post</a></li>
-      <li><a href="#"><i class="icon-calendar"></i> Calendar</a></li>
-      <li><a href="#"><i class="icon-user"></i> Members</a></li>
-      <li><a href="#"><i class="icon-comment"></i> Comments</a></li>
-      <li><a href="#"><i class="icon-picture"></i> Gallery</a></li>
+      <li><a href="#" onClick='listeProj("myProjects");'><i class="icon-home"></i> My projects</a>
+		<div id="myProjects" style="display:none;">
+			<ul>
+				<li><a href="projet3">Projet 3</a><span class="label label-important">1 week left</span></li>
+				<li><a href="projet3Bis">Projet 3 bis</a><span class="label label-inverse">incubating...</span></li>
+			</ul>
+		</div>
+	  </li>
+      <li><a href="#" onClick='listeProj("theirProjects");'><i class="icon-edit"></i> Projects I'm involved in</a>
+		<div id="theirProjects" style="display:none;">
+			<ul>
+				<li><a href="projet4">Projet 4</a><span class="label label-info">Smthng new!</span></li>
+			</ul>
+		</div>
+	  </li>
+	  
+      <li><a href="#" onClick='listeProj("favourPojects");'><i class="icon-star"></i> My favourites</a>
+		<div id="favourPojects" style="display:none;">
+			<ul>
+				<li><a href="projet5">Projet 5</a><span class="label label-success">Finished</span></li>
+			</ul>
+		</div>
+	  </li>
     </ul>
   </div>
 </div>
 
+
 <div class="sidebar-nav" style="margin-left:10px;">
-  <div class="well well-small">
+  <div class="well">
     <form class="navbar-form form-search span2" id="formSearchProjects">
-      <input id="inputSearchProjects" type="text" class="search-query typeahead input-medium" placeholder="Search projects" autocomplete="off"/>
+      <input id="inputSearchProjects" type="text" class="search-query typeahead input-medium" placeholder="Search projects" autocomplete="off" style="margin-bottom: auto; margin-top: auto;"/>
       <input type="submit" value="search" style="display: none;" />
   <!--        <div class="input-append search" >
           <input type="text" style="height: 100%;" class="span2 typeahead"/>
@@ -52,6 +79,26 @@
             </ul>
           </div>
         </div>-->
-      </form>  
+    </form>  
   </div>
 </div>
+
+<script>
+	
+	  $('#popoDemandes').popover({
+        'selector': '',
+        'content': '<ul class="nav nav-list"><li><a href="leProjet1">Projet 1</a></li><li><a href="leProjet1">Projet 1</a></li><li>...</li></ul>',
+        'html': 'true'
+      });
+
+	  $('#popoInvit').popover({
+        'selector': '',
+        'content': '<ul class="nav nav-list"><li><a href="www.kick.fr/index/leProjet2">Projet 2</a></li><li>...</li><li>...</li><li>...</li></ul>',
+        'html': 'true'
+      });	  
+	  
+	  function listeProj(lstName) {
+	    $( "#"+lstName ).toggle('500');
+	  }
+	  
+  </script>
