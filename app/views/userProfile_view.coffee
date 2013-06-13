@@ -14,15 +14,18 @@ module.exports = class UserProfileView extends View
   
   initialize: ->
     super
+    #console.log("new userProfile_view")
     @listenTo @model, "change", @render
     #event handler
-    @delegate "click", ".user_attr", @toogleProjectAttr
-    @delegate "blur", ".user_attr_input", @toogleProjectAttr
+    @delegate "click", ".user_attr", @toogleUsrAttr
+    @delegate "blur", ".user_attr_input", @toogleUsrAttr
+    @delegate "click", "#validateUser", @saveUser
+    @delegate "click", "#createUser", @saveUser
   
   render: =>
     super
 
-  toogleProjectAttr: (event)=>
+  toogleUsrAttr: (event)=>
     event.preventDefault()
     elem = $(event.target)
     if elem.is('.user_attr')
@@ -31,5 +34,18 @@ module.exports = class UserProfileView extends View
     else if elem.is('.user_attr_input')
         new_val = elem.val()
         elem.hide()
-        if new_val!="" then elem.parent().find(".user_attr").html(new_val) else elem.val(elem.parent().find(".user_attr").text())
+        if new_val!=""
+            data = {}
+            field = elem.parent().find(".user_attr").data("field")
+            data[field] = new_val
+            @model.set(data)
+            elem.parent().find(".user_attr").html(new_val)
+
+        else
+            elem.val(elem.parent().find(".user_attr").text()) 
         elem.parent().find(".user_attr").show()
+
+  saveUser: (event)->
+    event.preventDefault()
+    console.log("save user")
+    @model.save()

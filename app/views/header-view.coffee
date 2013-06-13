@@ -21,28 +21,7 @@ module.exports = class HeaderView extends View
     
   render: ->
     super
-    console.log(@model)
-    console.log($(@el).find(".typeahead"))
-    $(@el).find(".typeahead").typeahead(
-        source: (query, process)->
-            $.ajax(
-                url: "/collection/projects?startkey=["+JSON.stringify(query)+"]",
-                methode: "GET",
-                dataType: "json"
-                contentType: "application/json; charset=UTF-8"
-                beforeSend: ()->
-                    console.log(query)
-            ).done((data)->
-                result = []
-                data.rows.forEach((row)->
-                    result.push(row.value.nom_projet)
-                )
-                process(result)
-            )
-    )
-    $(@el).find("#formSearchProjects").submit((event)->
-        $(@).attr("action", "/col/projects/"+$(@).find("#inputSearchProjects").val())
-    )
+    #console.log(@model)
 
   signIn: (event)->
     event.preventDefault()
@@ -58,7 +37,6 @@ module.exports = class HeaderView extends View
     event.preventDefault()
     mediator.publish "signUp", false
     
-  setUser: (userData)=>
-    console.log("initUser !!")
-    @model.set(userData)
-    
+  #setUser: (userData)=>
+  #  @model.set(userData)
+  #  

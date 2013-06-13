@@ -12,7 +12,9 @@ module.exports = class CommentModel extends Model
         super(options)
         @url = ()-> "/model/"+(if @id then @id else "")
         @feed = {}
-        #@watch(since:"now", filter:"model")    
+        #@watch(since:"now", filter:"model")
+        @getUserSession()
+        mediator.subscribe "sessionChange", @setUser.bind(@)
            
     watch: (options)=>
         options || (options = {})
@@ -78,6 +80,21 @@ module.exports = class CommentModel extends Model
                 
                 console.log(response)
         ))
+        if attr.user
+            delete attr.user
         super(attr, opts)
-        
+    
+    getUserSession: ->
+        get_session = $.ajax(
+            url: "/_session",
+            method: "GET",
+            contentType: "application/json; charset=utf-8",
+            dataType: "json"
+        )
+        get_session.done((data)->
+            mediator.publish "sessionChange", data.userCtx
+        )
+    
+    setUser: (userCtx)->
+        @set("user": userCtx)
     

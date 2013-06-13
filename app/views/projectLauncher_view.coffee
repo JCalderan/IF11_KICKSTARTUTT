@@ -50,6 +50,8 @@ module.exports = class ProjectItemView extends View
     @delegate "show", "#validateInfo", @loadValidateInfoContent
     @delegate "click", "#save_change_button", @validate
     @delegate "click", ".memberToAdd" , @addMember
+    @delegate "submit", "#form_signin", @signIn
+    @delegate "submit", "#formSearchTags", @addTag
     @listenTo @model, "change", @render
   
   render: =>
@@ -79,6 +81,28 @@ module.exports = class ProjectItemView extends View
         
     @membersColView = new MembersColView(collection: @membersCol, container: "#members_list")
     @subview 'membersCol', @membersColView
+    $(@el).find(".typeahead").typeahead(
+        source: (query, process)=>
+            $.ajax(
+                url: "/collection/tags_by_name?group=true&startkey="+JSON.stringify(query),
+                methode: "GET",
+                dataType: "json"
+                contentType: "application/json; charset=UTF-8"
+                beforeSend: ()->
+                    #console.log(query)
+            ).done((data)=>
+                result = []
+                data.rows.forEach((row)=>
+                    result.push(row.key)
+                )
+                process(result)
+            )
+    )
+    $(@el).find("#formSearchProjects").submit((event)->
+        #$(@).attr("action", "/col/projects_by_name/"+$(@).find("#inputSearchProjects").val())
+        event.preventDefault();
+        window.location.replace("/col/projects_by_name/"+$(@).find("#inputSearchProjects").val())
+    )
  
   initLoadMembers: (event)->
     @membersCol.fetch()
@@ -192,7 +216,7 @@ module.exports = class ProjectItemView extends View
         elem.find(".modal-footer").find(".btn-primary").removeAttr("disabled")
     content.append(info_container, $("<hr>"), warning_container, $("<hr>"), error_container)
  
-  validate: (event)->
+  validate: (event)=>
     if !@errors
         #on passe à l'etape suivante
         switch @state
@@ -201,6 +225,11 @@ module.exports = class ProjectItemView extends View
                 @attrToSave["name"] = $('#project_title_input').val()
                 @attrToSave["description"] = $("#project_description_input").val()
                 @attrToSave["deadline"] = @deadline.valueOf()
+                @attrToSave["author"] = $(@el).find("#project_author").text()
+                @attrToSave["tags"] = []
+                $(@el).find("#tag_list a").toArray().forEach((tag)=>
+                    @attrToSave["tags"].push($(tag).text())
+                )
                 if @imageReader.result then @attrToSave["thumbnails"].push(@imageReader.result)
             when "incubation"
                 #@attrToSave["members"]
@@ -224,3 +253,16 @@ module.exports = class ProjectItemView extends View
     else
         console.log("error : can't reload, check model or model.id property")
         console.log(@model.id)
+
+  signIn: (event)->
+    event.preventDefault()
+    form = $(event.target)
+    user = {"username": form.find("#username").val(), "password": form.find("#password").val()}
+    mediator.publish "login", user
+    $(@el).find("#alertLogin").fadeIn()
+ 
+  addTag: (event)->
+    event.preventDefault()
+    elem = $(@el).find("#inputSearchTags")
+    tag = $("<a href='/col/projects_by_tag/"+elem.val()+"'><span class='label label-info'>"+elem.val()+"</span></a>")
+    $(@el).find("#tag_list").append(tag)

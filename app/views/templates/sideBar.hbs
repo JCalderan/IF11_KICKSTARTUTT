@@ -11,17 +11,24 @@
 <div class="sidebar-nav" style="margin-left:10px;">
   <div class="well well-small">
     <div class="row">
-      <div class="span1"><a href="http://critterapp.pagodabox.com/others/admin" class="thumbnail"><img src="http://critterapp.pagodabox.com/img/user.jpg" alt=""></a></div>
+      <div class="span1"><a href="/view/user" class="thumbnail"><img src={{#if user.thumbnail}} {{user.thumbnail}} {{else}} "http://critterapp.pagodabox.com/img/user.jpg" {{/if}} alt=""></a></div>
       <div class="span2">
-        admin<br/>
-        <strong>First Last Name</strong><br />
+	{{#if user.roles}}
+	  {{#each user.roles}}
+	    {{this}}<br/>
+	  {{/each}}
+	{{else}}
+	guest <br/>
+	{{/if}}
+        
+        <strong>{{#if user.firstname}} {{user.lastname}} {{user.firstname}} {{else}}John Doe{{/if}}</strong><br />
         <span class=" badge badge-warning"><a id="popoDemandes" style="color: white;" data-placement="right" data-toggle="popover" href="#" data-original-title="Mes demandes" data-trigger='focus'>3 demandes</a></span> 
 		<span class=" badge badge-info"><a id="popoInvit" style="color: white;" data-placement="right" data-toggle="popover" href="#" data-original-title="Mes invitations" data-trigger='focus'>4 invitations</span><br /><br />
       </div>
       <br />
       <div class="span4">
-        <a href="#" class="btn"><i class="icon-pencil"></i> <strong>New project</strong></a>
-      </div>   
+        <a href="/view/projectLauncher" class="btn"><i class="icon-pencil"></i> <strong>New project</strong></a>
+      </div>
     </div>
   </div>
 </div>
@@ -63,7 +70,9 @@
     <form class="navbar-form form-search span2" id="formSearchProjects">
       <input id="inputSearchProjects" type="text" class="search-query typeahead input-medium" placeholder="Search projects" autocomplete="off" style="margin-bottom: auto; margin-top: auto;"/>
       <input type="submit" value="search" style="display: none;" />
-  <!--        <div class="input-append search" >
+      	<!-- lol -->
+	<!--
+        <div class="input-append search" >
           <input type="text" style="height: 100%;" class="span2 typeahead"/>
           <div class="btn-group" style="height: 100%;">
             <button tabindex="-1" class="btn">Search</button>
@@ -77,8 +86,9 @@
               <li class="divider"></li>
               <li><a href="#">Separated link</a></li>
             </ul>
-          </div>
-        </div>-->
+          </div>-->
+        </div>
+	<!-- lol -->
     </form>  
   </div>
 </div>

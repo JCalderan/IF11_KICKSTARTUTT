@@ -8,3 +8,4 @@ module.exports = (match) ->
   match 'view/faq', 'home#faq'
   match 'view/advanceSearch', 'home#advanceSearch'
   match 'view/project/edit/:id', 'home#edit_project'
+  match 'view/user', 'home#viewUser'

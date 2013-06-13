@@ -68,5 +68,10 @@
       "to": "_list/test/projects",
       "from": "test",
       "method": "GET"
-  }   
+  },
+  {
+    "to": "org.couchdb.user::id",
+    "from": "/_session/:id",
+    "method": "PUT"
+  }
 ]
